@@ -71,14 +71,14 @@
                 leftScore++;
                 resetBall();
             }
-            function resetBall() {
-            ballX = canvas.width / 2;
-            ballY = canvas.height / 2;
-        }
 
             // Update the score display
             document.getElementById('leftScore').innerText = leftScore;
             document.getElementById('rightScore').innerText = rightScore;
+        }
+        function resetBall() {
+            ballX = canvas.width / 2;
+            ballY = canvas.height / 2;
         }
 
         // Render function
