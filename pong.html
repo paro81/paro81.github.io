@@ -30,6 +30,10 @@
         let ballY = canvas.height / 2;
         let ballSpeedX = 5, ballSpeedY = 2;
 
+        // Score variables
+        let leftScore = 0;
+        let rightScore = 0;
+
         // Update function
         function update() {
             // Move paddles
@@ -57,6 +61,24 @@
             if (ballX > canvas.width - paddleWidth && ballY > rightPaddleY && ballY < rightPaddleY + paddleHeight) {
                 ballSpeedX = -ballSpeedX;
             }
+            // Check for scoring
+            if (ballX < 0) {
+                // Right player scores a point
+                rightScore++;
+                resetBall();
+            } else if (ballX > canvas.width) {
+                // Left player scores a point
+                leftScore++;
+                resetBall();
+            }
+            function resetBall() {
+            ballX = canvas.width / 2;
+            ballY = canvas.height / 2;
+        }
+
+            // Update the score display
+            document.getElementById('leftScore').innerText = leftScore;
+            document.getElementById('rightScore').innerText = rightScore;
         }
 
         // Render function
