@@ -33,7 +33,12 @@
         // Score variables
         let leftScore = 0;
         let rightScore = 0;
-
+        
+        function resetBall() {
+            ballX = canvas.width / 2;
+            ballY = canvas.height / 2;
+        }
+        
         // Update function
         function update() {
             // Move paddles
@@ -75,10 +80,6 @@
             // Update the score display
             document.getElementById('leftScore').innerText = leftScore;
             document.getElementById('rightScore').innerText = rightScore;
-        }
-        function resetBall() {
-            ballX = canvas.width / 2;
-            ballY = canvas.height / 2;
         }
 
         // Render function
