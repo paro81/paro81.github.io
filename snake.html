@@ -24,6 +24,7 @@
         const snake = [{ x: 10, y: 10 }];
         let food = { x: 15, y: 15 };
         let direction = "right";
+        let score = 0; // Initialize the score
 
         function draw() {
             // Clear the canvas
@@ -39,6 +40,11 @@
             // Draw the food
             ctx.fillStyle = "#f00";
             ctx.fillRect(food.x * tileSize, food.y * tileSize, tileSize, tileSize);
+
+            // Display the score
+            ctx.fillStyle = "#fff";
+            ctx.font = "20px Arial";
+            ctx.fillText("Score: " + score, 10, 20);
         }
 
         function update() {
@@ -75,6 +81,7 @@
                 // Increase snake length and spawn new food
                 snake.unshift(food);
                 spawnFood();
+                score++;
             } else {
                 // Move the snake by adding a new head and removing the tail
                 snake.unshift(head);
@@ -108,6 +115,7 @@
             snake[0] = { x: 10, y: 10 };
             direction = "right";
             spawnFood();
+            score = 0;
         }
 
         function handleInput(event) {
