@@ -28,9 +28,6 @@
     <canvas id="froggerCanvas" width="600" height="600"></canvas>
 
     <script>
-        var element = document.getElementById("CrimsonText");
-        element.style.fontFamily = 'CrimsonText';
-        
         const canvas = document.getElementById("froggerCanvas");
         const ctx = canvas.getContext("2d");
 
@@ -50,6 +47,9 @@
         let isGameOver = false;
         let startTime;
         let elapsedTime = 0;
+
+        var element = document.getElementById("CrimsonText");
+        element.style.fontFamily = 'CrimsonText';
 
         function drawPlayer() {
             ctx.fillStyle = "#00ff00";
