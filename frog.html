@@ -14,17 +14,21 @@
         }
 
         canvas {
-            border: 2px solid #ffffff;
+            border: 3px solid #000;
         }
     </style>
     <title>blockfall</title>
 </head>
 <body>
-    <canvas id="froggerCanvas" width="600" height="600"></canvas>
+    <canvas id="froggerCanvas" width="400" height="400"></canvas>
+
     <script>
+        const canvas = document.getElementById("froggerCanvas");
+        const ctx = canvas.getContext("2d");
+
         const player = {
-            x: 300,
-            y: 300,
+            x: canvas.width / 2 - 15,
+            y: canvas.height - 30,
             width: 30,
             height: 30,
             speed: 5
@@ -63,18 +67,18 @@
             return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
         }
 
-      function updatePlayer() {
-          // Move the player to the mouse coordinates
-          canvas.addEventListener("mousemove", (event) => {
-              const rect = canvas.getBoundingClientRect();
-              player.x = event.clientX - rect.left - player.width / 2;
-              player.y = event.clientY - rect.top - player.height / 2;
-          });
+        function updatePlayer() {
+            // Move the player to the mouse coordinates
+            canvas.addEventListener("mousemove", (event) => {
+                const rect = canvas.getBoundingClientRect();
+                player.x = event.clientX - rect.left - player.width / 2;
+                player.y = event.clientY - rect.top - player.height / 2;
+            });
 
-          // Prevent the player from going out of bounds
-          player.x = Math.max(0, Math.min(player.x, canvas.width - player.width));
-          player.y = Math.max(0, Math.min(player.y, canvas.height - player.height));
-      }
+            // Prevent the player from going out of bounds
+            player.x = Math.max(0, Math.min(player.x, canvas.width - player.width));
+            player.y = Math.max(0, Math.min(player.y, canvas.height - player.height));
+        }
 
         function updateCars() {
             for (const car of cars) {
@@ -88,6 +92,7 @@
                     player.y + player.height > car.y
                 ) {
                     isGameOver = true;
+                    alert("Game Over! Try again.");
                     resetGame();
                 }
 
@@ -108,8 +113,8 @@
 
         function resetGame() {
             isGameOver = false;
-            player.x = 300;
-            player.y = 300;
+            player.x = canvas.width / 2 - 15;
+            player.y = canvas.height - 30;
             cars.length = 0;
             generateCars();
             startTime = new Date().getTime();
@@ -153,7 +158,4 @@
             if (!isGameOver) {
                 update();
             }
-        }, 1000 / 60 + elapsedTime / 2); // Update every 60 frames per second
-    </script>
-</body>
-</html>
+        }, 1000 / 90); //
