@@ -46,16 +46,16 @@
             const head = { ...snake[0] };
             switch (direction) {
                 case "up":
-                    head.y--;
+                    head.y-- / 2;
                     break;
                 case "down":
-                    head.y++;
+                    head.y++ / 2;
                     break;
                 case "left":
-                    head.x--;
+                    head.x-- / 2;
                     break;
                 case "right":
-                    head.x++;
+                    head.x++ / 2;
                     break;
             }
 
