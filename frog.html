@@ -14,7 +14,7 @@
         }
 
         canvas {
-            border: 2px solid #000;
+            border: 2px solid #ffffff;
         }
     </style>
     <title>falling blocks</title>
@@ -44,7 +44,7 @@
         let elapsedTime = 0;
 
         function drawPlayer() {
-            ctx.fillStyle = "#ff0000";
+            ctx.fillStyle = "#00ff00";
             ctx.fillRect(player.x, player.y, player.width, player.height);
         }
 
@@ -56,7 +56,7 @@
         }
 
         function drawStopwatch() {
-            ctx.fillStyle = "#000";
+            ctx.fillStyle = "#ffffff";
             ctx.font = "16px Arial";
             ctx.fillText("Time: " + formatTime(elapsedTime), canvas.width - 80, 20);
         }
