@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question/Answer Page</title>
+</head>
+<body>
+    <h1>Ask a Question</h1>
+    <form id="questionForm">
+        <label for="question">Your Question:</label>
+        <textarea id="question" name="question" rows="4" cols="50" required></textarea>
+        <br>
+        <button type="submit">Submit Question</button>
+    </form>
+
+    <script src="script.js">
+      document.addEventListener('DOMContentLoaded', function () {
+    const questionForm = document.getElementById('questionForm');
+
+    questionForm.addEventListener('submit', function (event) {
+        event.preventDefault();
+
+        // Get the user's question from the form
+        const userQuestion = document.getElementById('question').value;
+
+        // Send the question to your server (replace the URL with your server endpoint)
+        sendQuestionToServer(userQuestion);
+    });
+
+    function sendQuestionToServer(question) {
+        // This is a placeholder function; you should implement server-side logic
+        // to handle and store the questions on your server.
+        // You can use XMLHttpRequest, fetch, or a library like Axios to make an HTTP request.
+
+        // For example, using fetch:
+        fetch('https://your-server-endpoint.com/question', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ question: question }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Handle the response from the server if needed
+            console.log(data);
+            alert('Question submitted successfully!');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while submitting the question.');
+        });
+    }
+});
+    </script>
+</body>
+</html>
