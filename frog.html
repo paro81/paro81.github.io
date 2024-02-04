@@ -91,7 +91,7 @@
             if (keysPressed["ArrowRight"] && player.x < canvas.width - player.width) {
                 player.x += player.speed;
             }
-            });
+        });
 
             // Prevent the frog from going out of bounds
             player.x = Math.max(0, Math.min(player.x, canvas.width - player.width));
