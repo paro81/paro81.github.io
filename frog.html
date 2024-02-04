@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #7cb342;
+        }
+
+        canvas {
+            border: 2px solid #000;
+        }
+    </style>
+    <title>crossing game?</title>
+</head>
+<body>
+    <canvas id="froggerCanvas" width="400" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById("froggerCanvas");
+        const ctx = canvas.getContext("2d");
+
+        const player = {
+            x: canvas.width / 2 - 15,
+            y: canvas.height - 30,
+            width: 30,
+            height: 30,
+            speed: 5
+        };
+
+        const cars = [];
+        const carWidth = 40;
+        const carHeight = 20;
+        const carSpeed = 3;
+
+        let isGameOver = false;
+
+        function drawPlayer() {
+            ctx.fillStyle = "#008000";
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+        }
+
+        function drawCars() {
+            ctx.fillStyle = "#0000FF";
+            for (const car of cars) {
+                ctx.fillRect(car.x, car.y, carWidth, carHeight);
+            }
+        }
+
+        function updatePlayer() {
+            document.addEventListener("keydown", (event) => {
+                if (event.code === "ArrowUp" && player.y > 0) {
+                    player.y -= player.speed;
+                } else if (event.code === "ArrowDown" && player.y < canvas.height - player.height) {
+                    player.y += player.speed;
+                } else if (event.code === "ArrowLeft" && player.x > 0) {
+                    player.x -= player.speed;
+                } else if (event.code === "ArrowRight" && player.x < canvas.width - player.width) {
+                    player.x += player.speed;
+                }
+            });
+        }
+
+        function updateCars() {
+            for (const car of cars) {
+                car.y += carSpeed;
+
+                // Check for collision with the player
+                if (
+                    player.x < car.x + carWidth &&
+                    player.x + player.width > car.x &&
+                    player.y < car.y + carHeight &&
+                    player.y + player.height > car.y
+                ) {
+                    isGameOver = true;
+                    alert("Game Over! Try again.");
+                    resetGame();
+                }
+
+                // Remove cars that are off-screen
+                if (car.y > canvas.height) {
+                    car.y = -carHeight;
+                    car.x = Math.random() * (canvas.width - carWidth);
+                }
+            }
+        }
+
+        function resetGame() {
+            isGameOver = false;
+            player.x = canvas.width / 2 - 15;
+            player.y = canvas.height - 30;
+            cars.length = 0;
+            generateCars();
+        }
+
+        function generateCars() {
+            for (let i = 0; i < 5; i++) {
+                const car = {
+                    x: Math.random() * (canvas.width - carWidth),
+                    y: i * 80,
+                };
+                cars.push(car);
+            }
+        }
+
+        function draw() {
+            // Clear the canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw game elements
+            drawPlayer();
+            drawCars();
+
+            if (!isGameOver) {
+                requestAnimationFrame(draw);
+            }
+        }
+
+        function update() {
+            updatePlayer();
+            updateCars();
+        }
+
+        // Generate initial cars and start the game loop
+        generateCars();
+        draw();
+        setInterval(() => {
+            if (!isGameOver) {
+                update();
+            }
+        }, 1000 / 60); // Update every 60 frames per second
+    </script>
+</body>
+</html>
