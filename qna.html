@@ -24,17 +24,12 @@
         // Get the user's question from the form
         const userQuestion = document.getElementById('question').value;
 
-        // Send the question to your server (replace the URL with your server endpoint)
+        // Send the question to server 
         sendQuestionToServer(userQuestion);
     });
 
     function sendQuestionToServer(question) {
-        // This is a placeholder function; you should implement server-side logic
-        // to handle and store the questions on your server.
-        // You can use XMLHttpRequest, fetch, or a library like Axios to make an HTTP request.
-
-        // For example, using fetch:
-        fetch('https://your-server-endpoint.com/question', {
+        fetch('https://paro81.github.io/question', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
