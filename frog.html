@@ -10,7 +10,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #7cb342;
+            background-color: #000000;
         }
 
         canvas {
@@ -44,12 +44,12 @@
         let elapsedTime = 0;
 
         function drawPlayer() {
-            ctx.fillStyle = "#008000";
+            ctx.fillStyle = "#ff0000";
             ctx.fillRect(player.x, player.y, player.width, player.height);
         }
 
         function drawCars() {
-            ctx.fillStyle = "#0000FF";
+            ctx.fillStyle = "#ffffff";
             for (const car of cars) {
                 ctx.fillRect(car.x, car.y, carWidth, carHeight);
             }
