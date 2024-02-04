@@ -58,7 +58,7 @@
         function drawStopwatch() {
             ctx.fillStyle = "#ffffff";
             ctx.font = "16px Georgia";
-            ctx.fillText("Time: " + formatTime(elapsedTime), canvas.width - 80, 20);
+            ctx.fillText("Time: " + formatTime(elapsedTime), canvas.width - 160, 20);
         }
 
         function formatTime(time) {
@@ -92,7 +92,6 @@
                     player.y + player.height > car.y
                 ) {
                     isGameOver = true;
-                    setTimeout(1000);
                     resetGame();
                 }
 
