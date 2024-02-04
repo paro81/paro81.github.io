@@ -16,11 +16,6 @@
         canvas {
             border: 2px solid #ffffff;
         }
-
-        @font-face {
-          font-family: 'CrimsonText';
-          src: url('paro81.github.io/Crimson_Text/CrimsonText-Regular.ttf') format('truetype'); 
-        }
     </style>
     <title>falling blocks</title>
 </head>
@@ -28,8 +23,6 @@
     <canvas id="froggerCanvas" width="600" height="600"></canvas>
 
     <script>
-        const canvas = document.getElementById("froggerCanvas");
-        const ctx = canvas.getContext("2d");
 
         const player = {
             x: 300,
@@ -65,7 +58,7 @@
 
         function drawStopwatch() {
             ctx.fillStyle = "#ffffff";
-            ctx.font = "16px CrimsonText";
+            ctx.font = "16px Arial";
             ctx.fillText("Time: " + formatTime(elapsedTime), canvas.width - 80, 20);
         }
 
