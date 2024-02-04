@@ -21,7 +21,7 @@
 
         const tileSize = 20;
         const gridSize = canvas.width / tileSize;
-        const snake = [{ x: 5, y: 5 }];
+        const snake = [{ x: 10, y: 10 }];
         let food = { x: 15, y: 15 };
         let direction = "right";
 
@@ -46,16 +46,16 @@
             const head = { ...snake[0] };
             switch (direction) {
                 case "up":
-                    head.y-- / 4;
+                    head.y--;
                     break;
                 case "down":
-                    head.y++ / 4;
+                    head.y++;
                     break;
                 case "left":
-                    head.x-- / 4;
+                    head.x--;
                     break;
                 case "right":
-                    head.x++ / 4;
+                    head.x++;
                     break;
             }
 
@@ -134,7 +134,7 @@
         function gameLoop() {
             update();
             draw();
-            requestAnimationFrame(gameLoop);
+            setTimeout(gameLoop, 100);
         }
 
         // Start the game loop
