@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+        }
+    </style>
+    <title>platformer?</title>
+</head>
+<body>
+    <canvas id="gameCanvas" width="800" height="400"></canvas>
+    <script src="platformer.js">
+      document.addEventListener('DOMContentLoaded', function () {
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    const player = {
+        x: 50,
+        y: 50,
+        width: 30,
+        height: 30,
+        color: '#3498db',
+        speed: 5,
+        jumpStrength: 10,
+        isJumping: false,
+        velocityY: 0,
+    };
+
+    const platform = {
+        x: 0,
+        y: canvas.height - 20,
+        width: canvas.width,
+        height: 20,
+        color: '#2ecc71',
+    };
+
+    function drawPlayer() {
+        ctx.fillStyle = player.color;
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+    }
+
+    function drawPlatform() {
+        ctx.fillStyle = platform.color;
+        ctx.fillRect(platform.x, platform.y, platform.width, platform.height);
+    }
+
+    function handleInput() {
+        document.addEventListener('keydown', function (event) {
+            if (event.code === 'Space' && !player.isJumping) {
+                player.isJumping = true;
+                player.velocityY = -player.jumpStrength;
+            }
+        });
+    }
+
+    function updatePlayer() {
+        // Gravity
+        player.y += player.velocityY;
+        player.velocityY += 0.5;
+
+        // Check if the player is on the ground
+        if (player.y > canvas.height - player.height - platform.height) {
+            player.y = canvas.height - player.height - platform.height;
+            player.isJumping = false;
+        }
+
+        // Move left and right
+        if (keyState.ArrowLeft) {
+            player.x -= player.speed;
+        }
+        if (keyState.ArrowRight) {
+            player.x += player.speed;
+        }
+
+        // Prevent player from going out of bounds
+        player.x = Math.max(0, Math.min(player.x, canvas.width - player.width));
+    }
+
+    function update() {
+        updatePlayer();
+        handleCollisions();
+        draw();
+        requestAnimationFrame(update);
+    }
+
+    function handleCollisions() {
+        // Check for collision with the platform
+        if (
+            player.x < platform.x + platform.width &&
+            player.x + player.width > platform.x &&
+            player.y + player.height > platform.y
+        ) {
+            // Bounce the player off the platform
+            player.velocityY = 0;
+            player.y = platform.y - player.height;
+        }
+    }
+
+    function draw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawPlayer();
+        drawPlatform();
+    }
+
+    // Keyboard input handling
+    const keyState = {};
+    window.addEventListener('keydown', function (e) {
+        keyState[e.code] = true;
+    });
+    window.addEventListener('keyup', function (e) {
+        keyState[e.code] = false;
+    });
+
+    // Start the game loop
+    handleInput();
+    update();
+});
+
+    </script>
+</body>
+</html>
