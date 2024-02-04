@@ -16,17 +16,11 @@
         canvas {
             border: 2px solid #000;
         }
-
-        #timer {
-            font-size: 24px;
-            margin-top: 10px;
-        }
     </style>
-    <title>crossy road?</title>
+    <title>Frogger Game</title>
 </head>
 <body>
     <canvas id="froggerCanvas" width="400" height="400"></canvas>
-    <div id="timer">Time: 0s</div>
 
     <script>
         const canvas = document.getElementById("froggerCanvas");
@@ -47,6 +41,7 @@
 
         let isGameOver = false;
         let startTime;
+        let elapsedTime = 0;
 
         function drawPlayer() {
             ctx.fillStyle = "#008000";
@@ -60,25 +55,39 @@
             }
         }
 
-        function drawTimer() {
-            if (startTime) {
-                const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-                document.getElementById("timer").innerText = "Time: " + elapsedTime + "s";
-            }
+        function drawStopwatch() {
+            ctx.fillStyle = "#000";
+            ctx.font = "16px Arial";
+            ctx.fillText("Time: " + formatTime(elapsedTime), canvas.width - 80, 20);
+        }
+
+        function formatTime(time) {
+            const minutes = Math.floor(time / 60);
+            const seconds = time % 60;
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
         }
 
         function updatePlayer() {
             document.addEventListener("keydown", (event) => {
-                if (event.code === "ArrowUp" && player.y > 0) {
-                    player.y -= player.speed;
-                } else if (event.code === "ArrowDown" && player.y < canvas.height - player.height) {
-                    player.y += player.speed;
-                } else if (event.code === "ArrowLeft" && player.x > 0) {
-                    player.x -= player.speed;
-                } else if (event.code === "ArrowRight" && player.x < canvas.width - player.width) {
-                    player.x += player.speed;
+                switch (event.code) {
+                    case "ArrowUp":
+                        player.y -= player.speed;
+                        break;
+                    case "ArrowDown":
+                        player.y += player.speed;
+                        break;
+                    case "ArrowLeft":
+                        player.x -= player.speed;
+                        break;
+                    case "ArrowRight":
+                        player.x += player.speed;
+                        break;
                 }
             });
+
+            // Prevent the frog from going out of bounds
+            player.x = Math.max(0, Math.min(player.x, canvas.width - player.width));
+            player.y = Math.max(0, Math.min(player.y, canvas.height - player.height));
         }
 
         function updateCars() {
@@ -93,7 +102,7 @@
                     player.y + player.height > car.y
                 ) {
                     isGameOver = true;
-                    alert("Game Over! Time: " + Math.floor((Date.now() - startTime) / 1000) + "s. Try again.");
+                    alert("Game Over! Try again.");
                     resetGame();
                 }
 
@@ -105,13 +114,20 @@
             }
         }
 
+        function updateStopwatch() {
+            if (!isGameOver) {
+                const currentTime = new Date().getTime();
+                elapsedTime = Math.floor((currentTime - startTime) / 1000);
+            }
+        }
+
         function resetGame() {
             isGameOver = false;
             player.x = canvas.width / 2 - 15;
             player.y = canvas.height - 30;
             cars.length = 0;
             generateCars();
-            startTime = null;
+            startTime = new Date().getTime();
         }
 
         function generateCars() {
@@ -131,7 +147,7 @@
             // Draw game elements
             drawPlayer();
             drawCars();
-            drawTimer();
+            drawStopwatch();
 
             if (!isGameOver) {
                 requestAnimationFrame(draw);
@@ -141,16 +157,14 @@
         function update() {
             updatePlayer();
             updateCars();
+            updateStopwatch();
         }
 
         // Generate initial cars and start the game loop
         generateCars();
+        startTime = new Date().getTime();
         draw();
         setInterval(() => {
-            if (!isGameOver && startTime === null) {
-                startTime = Date.now();
-            }
-
             if (!isGameOver) {
                 update();
             }
