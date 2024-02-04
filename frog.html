@@ -16,11 +16,17 @@
         canvas {
             border: 2px solid #000;
         }
+
+        #timer {
+            font-size: 24px;
+            margin-top: 10px;
+        }
     </style>
-    <title>crossing game?</title>
+    <title>crossy road?</title>
 </head>
 <body>
     <canvas id="froggerCanvas" width="400" height="400"></canvas>
+    <div id="timer">Time: 0s</div>
 
     <script>
         const canvas = document.getElementById("froggerCanvas");
@@ -40,6 +46,7 @@
         const carSpeed = 3;
 
         let isGameOver = false;
+        let startTime;
 
         function drawPlayer() {
             ctx.fillStyle = "#008000";
@@ -50,6 +57,13 @@
             ctx.fillStyle = "#0000FF";
             for (const car of cars) {
                 ctx.fillRect(car.x, car.y, carWidth, carHeight);
+            }
+        }
+
+        function drawTimer() {
+            if (startTime) {
+                const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+                document.getElementById("timer").innerText = "Time: " + elapsedTime + "s";
             }
         }
 
@@ -79,7 +93,7 @@
                     player.y + player.height > car.y
                 ) {
                     isGameOver = true;
-                    alert("Game Over! Try again.");
+                    alert("Game Over! Time: " + Math.floor((Date.now() - startTime) / 1000) + "s. Try again.");
                     resetGame();
                 }
 
@@ -97,6 +111,7 @@
             player.y = canvas.height - 30;
             cars.length = 0;
             generateCars();
+            startTime = null;
         }
 
         function generateCars() {
@@ -116,6 +131,7 @@
             // Draw game elements
             drawPlayer();
             drawCars();
+            drawTimer();
 
             if (!isGameOver) {
                 requestAnimationFrame(draw);
@@ -131,6 +147,10 @@
         generateCars();
         draw();
         setInterval(() => {
+            if (!isGameOver && startTime === null) {
+                startTime = Date.now();
+            }
+
             if (!isGameOver) {
                 update();
             }
