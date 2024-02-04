@@ -146,13 +146,14 @@
             ) {
                 ballSpeedY = -ballSpeedY;
             }
+            
+            // Check for collisions with bricks
+            collisionDetection();
+            
             // Ball out of bounds
             if (ballY + 10 > canvas.height) {
                 // Reset the game
                 resetGame();
-
-            // Check for collisions with bricks
-            collisionDetection();
         }
 
         function draw() {
