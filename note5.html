@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factorization Calculator</title>
+</head>
+<body>
+    <h1>Factorization Calculator</h1>
+    <label for="numberInput">Enter a number:</label>
+    <input type="number" id="numberInput">
+    <button onclick="factorize()">Factorize</button>
+    <p id="result"></p>
+
+    <script>
+        function factorize() {
+            // Get the input value
+            const inputValue = document.getElementById('numberInput').value;
+
+            // Check if the input is a positive integer
+            if (inputValue <= 0 || !Number.isInteger(parseFloat(inputValue))) {
+                alert("Please enter a positive integer.");
+                return;
+            }
+
+            // Clear previous results
+            document.getElementById('result').innerText = '';
+
+            // Find prime factors
+            const factors = findPrimeFactors(inputValue);
+
+            // Display the result
+            document.getElementById('result').innerText = `Prime Factors: ${factors.join(', ')}`;
+        }
+
+        function findPrimeFactors(number) {
+            const factors = [];
+            
+            for (let i = 2; i <= Math.sqrt(number); i++) {
+                while (number % i === 0) {
+                    factors.push(i);
+                    number /= i;
+                }
+            }
+
+            // If the remaining number is a prime greater than 1
+            if (number > 1) {
+                factors.push(number);
+            }
+
+            return factors;
+        }
+    </script>
+</body>
+</html>
