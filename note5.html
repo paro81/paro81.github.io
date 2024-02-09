@@ -21,8 +21,8 @@
             const inputValue = document.getElementById('numberInput').value;
 
             // Check if the input is a positive integer
-            if (inputValue <= 0 || !Number.isInteger(parseFloat(inputValue))) {
-                alert("Please enter a positive integer.");
+            if (inputValue <= 1 || !Number.isInteger(parseFloat(inputValue))) {
+                alert("Please enter a positive & factorable integer.");
                 return;
             }
 
