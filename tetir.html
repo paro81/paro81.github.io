@@ -27,6 +27,8 @@
       const boardWidth = canvas.width / blockSize;
       const boardHeight = canvas.height / blockSize;
       const board = Array.from({ length: boardHeight }, () => Array(boardWidth).fill(0));
+      const fallSpeed = 1; // Adjust this value to control the fall speed
+      const fallInterval = 1000 / fallSpeed;
 
       // Tetris piece definitions
       const pieces = [
@@ -65,7 +67,7 @@
             resetBoard();
           }
         }
-        setTimeout(gameLoop, 60);
+        setTimeout(gameLoop, fallInterval);
         requestAnimationFrame(gameLoop);
       }
 
