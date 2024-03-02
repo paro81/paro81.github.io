@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="tetrisCanvas" width="300" height="600"></canvas>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const canvas = document.getElementById('tetrisCanvas');
+            const ctx = canvas.getContext('2d');
+
+            const ROWS = 20;
+            const COLS = 10;
+            const BLOCK_SIZE = 30;
+            const board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+            const colors = ['#000', '#00F', '#0F0', '#F00', '#F80', '#F0F', '#0FF', '#888'];
+
+            let currentPiece;
+            let currentX;
+            let currentY;
+
+            function drawSquare(x, y, color) {
+                ctx.fillStyle = color;
+                ctx.fillRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+                ctx.strokeRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+            }
+
+            function drawBoard() {
+                for (let row = 0; row < ROWS; row++) {
+                    for (let col = 0; col < COLS; col++) {
+                        if (board[row][col]) {
+                            drawSquare(col, row, colors[board[row][col]]);
+                        }
+                    }
+                }
+            }
+
+            function drawPiece() {
+                for (let row = 0; row < currentPiece.length; row++) {
+                    for (let col = 0; col < currentPiece[row].length; col++) {
+                        if (currentPiece[row][col]) {
+                            drawSquare(currentX + col, currentY + row, colors[currentPiece[row][col]]);
+                        }
+                    }
+                }
+            }
+
+            function collide() {
+                for (let row = 0; row < currentPiece.length; row++) {
+                    for (let col = 0; col < currentPiece[row].length; col++) {
+                        if (currentPiece[row][col] && (board[currentY + row] && board[currentY + row][currentX + col]) !== 0) {
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            function rotate() {
+                const tempPiece = currentPiece;
+                currentPiece = currentPiece[0].map((_, i) => currentPiece.map(row => row[i])).reverse();
+                if (collide()) {
+                    currentPiece = tempPiece;
+                }
+            }
+
+            function move(dirX, dirY) {
+                currentX += dirX;
+                currentY += dirY;
+                if (collide()) {
+                    currentX -= dirX;
+                    currentY -= dirY;
+                }
+            }
+
+            function clearLines() {
+                for (let row = ROWS - 1; row >= 0; row--) {
+                    if (board[row].every(cell => cell !== 0)) {
+                        board.splice(row, 1);
+                        board.unshift(Array(COLS).fill(0));
+                    }
+                }
+            }
+
+            function update() {
+                move(0, 1);
+                if (collide()) {
+                    move(0, -1);
+                    for (let row = 0; row < currentPiece.length; row++) {
+                        for (let col = 0; col < currentPiece[row].length; col++) {
+                            if (currentPiece[row][col]) {
+                                board[currentY + row][currentX + col] = colors.indexOf(colors[currentPiece[row][col]]);
+                            }
+                        }
+                    }
+                    clearLines();
+                    spawnPiece();
+                }
+            }
+
+            function spawnPiece() {
+                currentX = Math.floor(COLS / 2) - Math.floor(currentPiece[0].length / 2);
+                currentY = 0;
+                currentPiece = PIECES[Math.floor(Math.random() * PIECES.length)];
+                if (collide()) {
+                    // Game over
+                    board.forEach(row => row.fill(0));
+                }
+            }
+
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawBoard();
+                drawPiece();
+            }
+
+            function gameLoop() {
+                update();
+                draw();
+            }
+
+            // Tetris pieces (I, J, L, O, S, T, Z)
+            const PIECES = [
+                [
+                    [1, 1, 1, 1]
+                ],
+                [
+                    [1, 1, 1],
+                    [1]
+                ],
+                [
+                    [1, 1, 1],
+                    [0, 0, 1]
+                ],
+                [
+                    [1, 1],
+                    [1, 1]
+                ],
+                [
+                    [0, 1, 1],
+                    [1, 1]
+                ],
+                [
+                    [1, 1, 1],
+                    [0, 1]
+                ],
+                [
+                    [1, 1, 0],
+                    [0, 1, 1]
+                ]
+            ];
+
+            document.addEventListener('keydown', (e) => {
+                switch (e.key) {
+                    case 'ArrowLeft':
+                        move(-1, 0);
+                        break;
+                    case 'ArrowRight':
+                        move(1, 0);
+                        break;
+                    case 'ArrowDown':
+                        move(0, 1);
+                        break;
+                    case 'ArrowUp':
+                        rotate();
+                        break;
+                }
+            });
+
+            spawnPiece();
+            setInterval(gameLoop, 1000 / 2); // Adjust the interval for game speed
+        });
+    </script>
+</body>
+</html>
