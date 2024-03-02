@@ -1,186 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tetris</title>
-    <style>
-        canvas {
-            border: 1px solid #000;
-            display: block;
-            margin: 20px auto;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    canvas {
+      border: 1px solid #000;
+    }
+  </style>
+  <title>Tetris</title>
 </head>
 <body>
-    <canvas id="tetrisCanvas" width="300" height="600"></canvas>
+  <canvas id="tetrisCanvas" width="300" height="600"></canvas>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const canvas = document.getElementById('tetrisCanvas');
+      const ctx = canvas.getContext('2d');
+      const blockSize = 30;
+      const boardWidth = canvas.width / blockSize;
+      const boardHeight = canvas.height / blockSize;
+      const board = Array.from({ length: boardHeight }, () => Array(boardWidth).fill(0));
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const canvas = document.getElementById('tetrisCanvas');
-            const ctx = canvas.getContext('2d');
+      // Tetris piece definitions
+      const pieces = [
+        [[1, 1, 1, 1]],
+        [[1, 1], [1, 1]],
+        [[1, 1, 1], [0, 1, 0]],
+        [[1, 1, 1], [1, 0, 0]],
+        [[1, 1, 1], [0, 0, 1]],
+        [[1, 1, 0], [0, 1, 1]],
+        [[0, 1, 1], [1, 1, 0]]
+      ];
 
-            const ROWS = 20;
-            const COLS = 10;
-            const BLOCK_SIZE = 30;
-            const board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
-            const colors = ['#000', '#00F', '#0F0', '#F00', '#F80', '#F0F', '#0FF', '#888'];
+      // Game state
+      let currentPiece = getRandomPiece();
+      let pieceX = Math.floor(boardWidth / 2) - Math.floor(currentPiece[0].length / 2);
+      let pieceY = 0;
 
-            let currentPiece;
-            let currentX;
-            let currentY;
+      // Handle keyboard input
+      document.addEventListener('keydown', handleKeyPress);
 
-            function drawSquare(x, y, color) {
-                ctx.fillStyle = color;
-                ctx.fillRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
-                ctx.strokeRect(x * BLOCK_SIZE, y * BLOCK_SIZE, BLOCK_SIZE, BLOCK_SIZE);
+      // Game loop
+      function gameLoop() {
+        clearCanvas();
+        drawBoard();
+        drawPiece();
+        pieceY++;
+
+        if (collides()) {
+          placePieceOnBoard();
+          currentPiece = getRandomPiece();
+          pieceX = Math.floor(boardWidth / 2) - Math.floor(currentPiece[0].length / 2);
+          pieceY = 0;
+
+          if (collides()) {
+            // Game over
+            resetBoard();
+          }
+        }
+
+        requestAnimationFrame(gameLoop);
+      }
+
+      function drawBoard() {
+        for (let y = 0; y < boardHeight; y++) {
+          for (let x = 0; x < boardWidth; x++) {
+            if (board[y][x] !== 0) {
+              ctx.fillStyle = '#00F';
+              ctx.fillRect(x * blockSize, y * blockSize, blockSize, blockSize);
             }
+          }
+        }
+      }
 
-            function drawBoard() {
-                for (let row = 0; row < ROWS; row++) {
-                    for (let col = 0; col < COLS; col++) {
-                        if (board[row][col]) {
-                            drawSquare(col, row, colors[board[row][col]]);
-                        }
-                    }
-                }
+      function drawPiece() {
+        for (let y = 0; y < currentPiece.length; y++) {
+          for (let x = 0; x < currentPiece[y].length; x++) {
+            if (currentPiece[y][x] !== 0) {
+              ctx.fillStyle = '#F00';
+              ctx.fillRect((pieceX + x) * blockSize, (pieceY + y) * blockSize, blockSize, blockSize);
             }
+          }
+        }
+      }
 
-            function drawPiece() {
-                for (let row = 0; row < currentPiece.length; row++) {
-                    for (let col = 0; col < currentPiece[row].length; col++) {
-                        if (currentPiece[row][col]) {
-                            drawSquare(currentX + col, currentY + row, colors[currentPiece[row][col]]);
-                        }
-                    }
-                }
+      function placePieceOnBoard() {
+        for (let y = 0; y < currentPiece.length; y++) {
+          for (let x = 0; x < currentPiece[y].length; x++) {
+            if (currentPiece[y][x] !== 0) {
+              board[pieceY + y][pieceX + x] = 1;
             }
+          }
+        }
+      }
 
-            function collide() {
-                for (let row = 0; row < currentPiece.length; row++) {
-                    for (let col = 0; col < currentPiece[row].length; col++) {
-                        if (currentPiece[row][col] && (board[currentY + row] && board[currentY + row][currentX + col]) !== 0) {
-                            return true;
-                        }
-                    }
-                }
-                return false;
+      function collides() {
+        for (let y = 0; y < currentPiece.length; y++) {
+          for (let x = 0; x < currentPiece[y].length; x++) {
+            if (
+              currentPiece[y][x] !== 0 &&
+              (board[pieceY + y] && board[pieceY + y][pieceX + x]) !== 0
+            ) {
+              return true;
             }
+          }
+        }
+        return false;
+      }
 
-            function rotate() {
-                const tempPiece = currentPiece;
-                currentPiece = currentPiece[0].map((_, i) => currentPiece.map(row => row[i])).reverse();
-                if (collide()) {
-                    currentPiece = tempPiece;
-                }
+      function getRandomPiece() {
+        return pieces[Math.floor(Math.random() * pieces.length)];
+      }
+
+      function handleKeyPress(event) {
+        switch (event.key) {
+          case 'ArrowLeft':
+            if (isValidMove(-1)) pieceX--;
+            break;
+          case 'ArrowRight':
+            if (isValidMove(1)) pieceX++;
+            break;
+          case 'ArrowDown':
+            while (!collides()) {
+              pieceY++;
             }
+            pieceY--;
+            break;
+          case 'ArrowUp':
+            rotatePiece();
+            break;
+        }
+      }
 
-            function move(dirX, dirY) {
-                currentX += dirX;
-                currentY += dirY;
-                if (collide()) {
-                    currentX -= dirX;
-                    currentY -= dirY;
-                }
+      function isValidMove(offsetX) {
+        for (let y = 0; y < currentPiece.length; y++) {
+          for (let x = 0; x < currentPiece[y].length; x++) {
+            if (
+              currentPiece[y][x] !== 0 &&
+              (board[pieceY + y] && board[pieceY + y][pieceX + x + offsetX]) !== 0
+            ) {
+              return false;
             }
+          }
+        }
+        return true;
+      }
 
-            function clearLines() {
-                for (let row = ROWS - 1; row >= 0; row--) {
-                    if (board[row].every(cell => cell !== 0)) {
-                        board.splice(row, 1);
-                        board.unshift(Array(COLS).fill(0));
-                    }
-                }
+      function rotatePiece() {
+        const rotatedPiece = currentPiece[0].map((_, i) => currentPiece.map(row => row[i])).reverse();
+        if (!collidesWithRotation(rotatedPiece)) {
+          currentPiece = rotatedPiece;
+        }
+      }
+
+      function collidesWithRotation(rotatedPiece) {
+        for (let y = 0; y < rotatedPiece.length; y++) {
+          for (let x = 0; x < rotatedPiece[y].length; x++) {
+            if (
+              rotatedPiece[y][x] !== 0 &&
+              (board[pieceY + y] && board[pieceY + y][pieceX + x]) !== 0
+            ) {
+              return true;
             }
+          }
+        }
+        return false;
+      }
 
-            function update() {
-                move(0, 1);
-                if (collide()) {
-                    move(0, -1);
-                    for (let row = 0; row < currentPiece.length; row++) {
-                        for (let col = 0; col < currentPiece[row].length; col++) {
-                            if (currentPiece[row][col]) {
-                                board[currentY + row][currentX + col] = colors.indexOf(colors[currentPiece[row][col]]);
-                            }
-                        }
-                    }
-                    clearLines();
-                    spawnPiece();
-                }
-            }
+      function resetBoard() {
+        board.forEach(row => row.fill(0));
+      }
 
-            function spawnPiece() {
-                currentX = Math.floor(COLS / 2) - Math.floor(currentPiece[0].length / 2);
-                currentY = 0;
-                currentPiece = PIECES[Math.floor(Math.random() * PIECES.length)];
-                if (collide()) {
-                    // Game over
-                    board.forEach(row => row.fill(0));
-                }
-            }
+      function clearCanvas() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
 
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                drawBoard();
-                drawPiece();
-            }
-
-            function gameLoop() {
-                update();
-                draw();
-            }
-
-            // Tetris pieces (I, J, L, O, S, T, Z)
-            const PIECES = [
-                [
-                    [1, 1, 1, 1]
-                ],
-                [
-                    [1, 1, 1],
-                    [1]
-                ],
-                [
-                    [1, 1, 1],
-                    [0, 0, 1]
-                ],
-                [
-                    [1, 1],
-                    [1, 1]
-                ],
-                [
-                    [0, 1, 1],
-                    [1, 1]
-                ],
-                [
-                    [1, 1, 1],
-                    [0, 1]
-                ],
-                [
-                    [1, 1, 0],
-                    [0, 1, 1]
-                ]
-            ];
-
-            document.addEventListener('keydown', (e) => {
-                switch (e.key) {
-                    case 'ArrowLeft':
-                        move(-1, 0);
-                        break;
-                    case 'ArrowRight':
-                        move(1, 0);
-                        break;
-                    case 'ArrowDown':
-                        move(0, 1);
-                        break;
-                    case 'ArrowUp':
-                        rotate();
-                        break;
-                }
-            });
-
-            spawnPiece();
-            setInterval(gameLoop, 1000 / 2); // Adjust the interval for game speed
-        });
-    </script>
+      // Start the game loop
+      gameLoop();
+    });
+  </script>
 </body>
 </html>
