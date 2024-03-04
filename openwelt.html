@@ -46,16 +46,16 @@
     // Update function
     function update() {
       // Move player based on keyboard input
-      if (keys["ArrowUp"] && player.y > 0) {
+      if (keys["ArrowUp"]) {
         player.y -= player.speed;
       }
-      if (keys["ArrowDown"] && player.y < canvas.height) {
+      if (keys["ArrowDown"]) {
         player.y += player.speed;
       }
-      if (keys["ArrowLeft"] && player.x > 0) {
+      if (keys["ArrowLeft"]) {
         player.x -= player.speed;
       }
-      if (keys["ArrowRight"] && player.x < canvas.width) {
+      if (keys["ArrowRight"]) {
         player.x += player.speed;
       }
 
