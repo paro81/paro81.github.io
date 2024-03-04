@@ -13,18 +13,13 @@
 </head>
 <body>
   <canvas id="gameCanvas"></canvas>
-  <div id="myTextElement1">well here we are, the beginning of the end.</div>
   <script>
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
-    const textElement = document.getElementById("myTextElement1");
     
     // set canvas size
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
-    // Some text i guess idk if it works
-    textElement1.textContent 
 
     // player thing
     const player = {
@@ -69,6 +64,11 @@
       // draw player
       ctx.fillStyle = "blue";
       ctx.fillRect(player.x - 10, player.y - 10, 20, 20);
+      
+      // some text
+      ctx.fillStyle = "black";
+      ctx.font = "20px Times New Roman";
+      ctx.fillText("here it is, the beginning of the end.", 10, 30);
 
       // Request the next animation frame
       requestAnimationFrame(update);
