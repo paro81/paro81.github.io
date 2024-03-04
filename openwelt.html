@@ -12,14 +12,19 @@
   </style>
 </head>
 <body>
-  <canvas id="gameCanvas"></canvas>
+  <canvas id="gameCanvas1"></canvas>
+  <canvas id="gameCanvas2" style="display: none;"></canvas>
   <script>
-    const canvas = document.getElementById("gameCanvas");
+    const canvas = document.getElementById("gameCanvas1");
+    const canvas2 = document.getElementById("gameCanvas2");
     const ctx = canvas.getContext("2d");
+    const ctx2 = canvas2.getContext("2d");
     
     // set canvas size
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    canvas2.width = window.innerWidth;
+    canvas2.height = window.innerHeight;
 
     // player thing
     const player = {
@@ -27,6 +32,16 @@
       y: canvas.height / 2,
       speed: 3
     };
+
+    // protal
+    const rectangle = {
+      x: 200,
+      y: 570,
+      width: 40,
+      height: 40
+    };
+
+    let isPlayerInsideRectangle = false;
 
     // keyboard input
     window.addEventListener("keydown", handleKeyDown);
@@ -58,6 +73,36 @@
         player.x += player.speed;
       }
 
+      if (
+        player.x > rectangle.x &&
+        player.x < rectangle.x + rectangle.width &&
+        player.y > rectangle.y &&
+        player.y < rectangle.y + rectangle.height
+      ) {
+        // Hide first canvas
+        canvas.style.display = "none";
+        // Show second canvas
+        canvas2.style.display = "block";
+
+        // Clear the new canvas
+        ctx2.clearRect(0, 0, canvas2.width, canvas2.height);
+      } else {
+        // Clear the first canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // Show the first canvas
+        canvas.style.display = "block";
+        // Hide the second canvas
+        canvas2.style.display = "none";
+
+        // Draw a rectangle on the first canvas
+        ctx.fillStyle = "blue";
+        ctx.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+
+        // Draw the player on the first canvas
+        ctx.fillStyle = "red";
+        ctx.fillRect(player.x - 10, player.y - 10, 20, 20);
+      }
+
       // clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -65,17 +110,17 @@
       ctx.fillStyle = "blue";
       ctx.fillRect(player.x - 10, player.y - 10, 20, 20);
 
-      // protal
+      // draw_protal
       ctx.fillStyle = "black";
-      ctx.fillRect(200, 570, 50, 50);
+      ctx.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
 
       // some text
       ctx.fillStyle = "black";
       ctx.font = "14px Times New Roman";
-      ctx.fillText("here it is, the beginning of the end.", 320, 120);
-      ctx.fillText("maybe i should do ?", 980, 240);
-      ctx.fillText("i finally figured out how to _", 680, 600);
-      ctx.fillText("twelve fourty nine. it's weird how i can-", 1200, 720);
+      ctx.fillText("here it is, another not-a-note.", 320, 120);
+      ctx.fillText("maybe i did dodid ?", 980, 240);
+      ctx.fillText("i finally figured something out", 680, 600);
+      ctx.fillText("twelve forty nine. time is weird???", 1200, 720);
 
       // Request the next animation frame
       requestAnimationFrame(update);
