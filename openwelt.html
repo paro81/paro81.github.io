@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>experiement</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="gameCanvas"></canvas>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+
+    // Set canvas size
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    // Player object
+    const player = {
+      x: canvas.width / 2,
+      y: canvas.height / 2,
+      speed: 5
+    };
+
+    // Handle keyboard input
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    const keys = {};
+
+    function handleKeyDown(event) {
+      keys[event.code] = true;
+    }
+
+    function handleKeyUp(event) {
+      keys[event.code] = false;
+    }
+
+    // Update function
+    function update() {
+      // Move player based on keyboard input
+      if (keys["ArrowUp"] && player.y > 0) {
+        player.y -= player.speed;
+      }
+      if (keys["ArrowDown"] && player.y < canvas.height) {
+        player.y += player.speed;
+      }
+      if (keys["ArrowLeft"] && player.x > 0) {
+        player.x -= player.speed;
+      }
+      if (keys["ArrowRight"] && player.x < canvas.width) {
+        player.x += player.speed;
+      }
+
+      // Clear the canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      // Draw the player
+      ctx.fillStyle = "blue";
+      ctx.fillRect(player.x - 10, player.y - 10, 20, 20);
+
+      // Request the next animation frame
+      requestAnimationFrame(update);
+    }
+
+    // Start the game loop
+    update();
+  </script>
+</body>
+</html>
