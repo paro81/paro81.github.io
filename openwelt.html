@@ -12,23 +12,28 @@
   </style>
 </head>
 <body>
+  <div id="myTextElement1">well here we are, the beginning of the end.</div>
   <canvas id="gameCanvas"></canvas>
   <script>
     const canvas = document.getElementById("gameCanvas");
     const ctx = canvas.getContext("2d");
+    const textElement = document.getElementById("myTextElement1");
 
-    // Set canvas size
+    // Some text i guess idk if it works
+    textElement1.textContent 
+    
+    // set canvas size
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    // Player object
+    // player thing
     const player = {
       x: canvas.width / 2,
       y: canvas.height / 2,
       speed: 3
     };
 
-    // Handle keyboard input
+    // keyboard input
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
 
@@ -42,7 +47,7 @@
       keys[event.code] = false;
     }
 
-    // Update function
+    // Update func
     function update() {
       // Move player based on keyboard input
       if (keys["ArrowUp"]) {
@@ -58,10 +63,10 @@
         player.x += player.speed;
       }
 
-      // Clear the canvas
+      // clear canvas
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Draw the player
+      // draw player
       ctx.fillStyle = "blue";
       ctx.fillRect(player.x - 10, player.y - 10, 20, 20);
 
@@ -69,9 +74,8 @@
       requestAnimationFrame(update);
     }
 
-    // Start the game loop
+    // game loop
     update();
   </script>
 </body>
-  well this is it, the beginning of the end.
 </html>
