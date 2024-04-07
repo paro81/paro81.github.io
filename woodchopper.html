@@ -24,11 +24,21 @@
     const playerWidth = 50;
     const playerHeight = 50;
 
+    let TreeX = canvas.width / 2;
+    let TreeY = 0 - canvas.height;
+    const TreeWidth = 40;
+    const TreeHeight = 400;
+
     let score = 0;
 
     function drawPlayer() {
       ctx.fillStyle = 'green';
       ctx.fillRect(playerX, playerY, playerWidth, playerHeight);
+    }
+
+    function drawTree () {
+      ctx.fillStyle = 'brown';
+      ctx.fillRect(TreeX, TreeY, TreeWidth, TreeHeight);
     }
 
     function drawScore() {
@@ -48,7 +58,7 @@
       drawScore();
 
       // Update score (for demo purposes)
-      score++;
+      score;
 
       // Call updateGame() recursively to create a game loop
       requestAnimationFrame(updateGame);
