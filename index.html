@@ -80,24 +80,12 @@
                 "this","should","have","a","random","message","every","time","this","webpage","reloads",":D"
             ];
         
-            var previousIndex = -1;
-
-        // Function to generate a random index for the messages array
-            function getRandomIndex() {
-              var newIndex;
-              do {
-                newIndex = Math.floor(Math.random() * messages.length);
-              } while (newIndex === previousIndex); // Make sure the new index is different from the previous one
-              previousIndex = newIndex;
-              return newIndex;
-            }
-
-        // Function to display a random message
-            function displayRandomMessage() {
-              var index = getRandomIndex();
-                messageElement.style.color = "#d1d7e6";
-              document.getElementById("message").innerText = messages[index];
-            }
+            var randomIndex = Math.floor(Math.random() * messages.length);
+            var randomMessage = messages[randomIndex];
+        
+            var messageElement = document.getElementById("message");
+            messageElement.textContent = randomMessage;
+            messageElement.style.color = "#d1d7e6";
         });
         </script>
     </body>
