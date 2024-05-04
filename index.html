@@ -63,9 +63,29 @@
         <a class="colorlink" href="https://paro81.github.io/media.html"><button class="button">trash</button></a>
         <a class="colorlink" href="ultimatum.html"><button class="button">why</button></a>
         <br>
+        <p id="random-message"></p>
         <br>
         <br>
         <br>
         <div id="movetext"><p>,,,,,<br>
         now not in color somehow///</p></div>
+        <script src="script.js">
+            window.onload = function() {
+            var messages = [
+                "wsg",
+                "number 2",
+                "threes",
+                "floor",
+                "five",
+                // add more messages here
+            ];
+            
+            var randomIndex = Math.floor(Math.random() * messages.length);
+            var randomMessage = messages[randomIndex];
+            
+            var messageContainer = document.getElementById("random-message");
+            messageContainer.textContent = randomMessage;
+            };
+        </script>
     </body>
+</html>
