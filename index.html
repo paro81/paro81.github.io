@@ -74,17 +74,18 @@
         now not in color somehow///</p></div>
         <script>
         // JavaScript code
-        document.addEventListener("DOMContentLoaded", function() {
-          // Array of messages
-          var messages = [
-            "this","should","have","a","random","message","every","time","this","webpage","reloads",":D"
-          ];
+            document.addEventListener("DOMContentLoaded", function() {
+        // Array of messages
+            var messages = [
+                "this","should","have","a","random","message","every","time","this","webpage","reloads",":D"
+            ];
         
-          var randomIndex = Math.floor(Math.random() * messages.length);
-          var randomMessage = messages[randomIndex];
+            var randomIndex = Math.floor(Math.random() * messages.length);
+            var randomMessage = messages[randomIndex];
         
-          var messageElement = document.getElementById("message");
-          messageElement.textContent = randomMessage;
+            var messageElement = document.getElementById("message");
+            messageElement.textContent = randomMessage;
+            messageElement.style.color = "#d1d7e6";
         });
         </script>
     </body>
