@@ -12,7 +12,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 "minimal effort, high reward", 
                 "a lackluster of ideas, galore",
                 "somehow, in the end, i still exist.",
-                "asdjjfgjsklafjlasfjasdkjgfhkdsafdjfkll kind of situation"
+                "asdjjfgjsklafjlasfjasdkjgfhkdsafdjfkll kind of situation",
+                "ERROR 404 PAGE NOT FOUND"
             ];
         
             var randomIndex = Math.floor(Math.random() * messages.length);
