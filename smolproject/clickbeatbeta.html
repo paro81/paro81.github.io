@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>in beta</title>
+  <title>Click to the Beat</title>
   <style>
     #gameCanvas {
       width: 400px;
@@ -16,6 +16,8 @@
 <body>
   <div id="gameCanvas"></div>
   <button onclick="startGame()">Start Game</button>
+
+  <audio id="audio" src="your-song.mp3" preload="auto"></audio>
 
   <script>
     let startTime;
@@ -34,7 +36,8 @@
       // Add event listener for clicks
       document.getElementById('gameCanvas').addEventListener('click', handleClick);
 
-      document.getElementById('smolproject/songs/Abandon_Planet.mp3').play();
+      // Start playing music track
+      document.getElementById('audio').play();
     }
 
     function handleClick() {
@@ -59,6 +62,9 @@
     }
 
     function endGame() {
+      // Stop the audio
+      document.getElementById('audio').pause();
+
       // Display final score
       alert('Game Over! Your score: ' + score);
 
