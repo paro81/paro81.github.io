@@ -5,13 +5,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 "pro casual geo dasher", 
                 "rhythm music is interesting", 
                 "the himothy is real", 
-                "idk what else to say", 
+                "idk what else to say... hello?", 
                 "don't go outside", 
                 "touch grass, have you seen a tree before?", 
                 "realising my errors since 2013", 
                 "minimal effort, high reward", 
                 "a lackluster of ideas, galore",
-                "somehow, in the end, i still exist."
+                "somehow, in the end, i still exist.",
+                "asdjjfgjsklafjlasfjasdkjgfhkdsafdjfkll kind of situation"
             ];
         
             var randomIndex = Math.floor(Math.random() * messages.length);
