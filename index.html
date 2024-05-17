@@ -55,10 +55,20 @@
             box-shadow: 0 5px #666;
             transform: translateY(4px);
         }
+            .content {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
         </style>
         <script src="textwithstuff.js"></script>
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('content').style.opacity = 1;
+        });
+    </script>
     </head>
     <body>
+        <div class="content" style="opacity: 0;" id="content">
         <h1 class="fadein">it's <em>Parzo</em> now</h1>
         <p><div id="message">Loading...</div></p>
         <p class="colorzwei">yup this is it, the website, official i guess, but not really. idk what else to say.</p>
@@ -75,5 +85,6 @@
         <br>
         <div id="movetext"><p class="bodyblend">,,,,,<br>
         now not in color somehow///</p></div>
+        </div>
     </body>
 </html>
