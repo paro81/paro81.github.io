@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 "a lackluster of ideas, galore",
                 "somehow, in the end, i still exist.",
                 "asdjjfgjsklafjlasfjasdkjgfhkdsafdjfkll kind of situation",
-                "ERROR 404 PAGE NOT FOUND"
+                "ERROR 404 PAGE NOT FOUND",
+                "i hate circles, squares are okay, triangles are deadly & weird"
             ];
         
             var randomIndex = Math.floor(Math.random() * messages.length);
