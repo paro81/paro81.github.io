@@ -67,13 +67,7 @@
         <script>
         document.addEventListener("DOMContentLoaded", function() {
             var content = document.getElementById('content');
-
-            if (!sessionStorage.getItem('softReload')) {
-                content.classList.add('fade-in');
-                sessionStorage.setItem('softReload', true);
-            } else {
-                sessionStorage.removeItem('softReload');
-            }
+            content.classList.add('fade-in'); // Add fade-in class
         });
     </script>
     </head>
