@@ -57,18 +57,22 @@
         }
             .content {
             opacity: 0;
-            transition: opacity 1s ease-in-out;
+            transition: opacity 0.5s ease-in-out;
+        }
+            .fade-in {
+            opacity: 1;
         }
         </style>
         <script src="textwithstuff.js"></script>
         <script>
         document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById('content').style.opacity = 1;
+            var content = document.getElementById('content');
+            content.classList.add('fade-in'); // Add fade-in class
         });
     </script>
     </head>
     <body>
-        <div class="content" style="opacity: 0;" id="content">
+        <div class="content" id="content">
         <h1 class="fadein">it's <em>Parzo</em> now</h1>
         <p><div id="message">Loading...</div></p>
         <p class="colorzwei">yup this is it, the website, official i guess, but not really. idk what else to say.</p>
