@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 "asdjjfgjsklafjlasfjasdkjgfhkdsafdjfkll kind of situation",
                 "ERROR 404 PAGE NOT FOUND",
                 "i hate circles, squares are okay, triangles are deadly & weird",
-                "watch it, i'm gonna cook soon"
+                "watch me, i'm gonna cook soon, just you wait."
             ];
         
             var randomIndex = Math.floor(Math.random() * messages.length);
