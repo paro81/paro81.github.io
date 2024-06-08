@@ -33,12 +33,11 @@
     </style>
 </head>
 <body>
-    <canvas id="gameCanvas" width="1920" height="1080"></canvas>
+    <canvas id="gameCanvas" width="960" height="540">bro why ur browser not support canvas function, blawg u livin in the ancient days</canvas>
     <br>
     <button id="startButton" class="button">Start</button>
     <button id="stopButton" class="button">Stop</button>
     <button id="resetButton" class="button">Reset</button>
-    <br>
     <p>life is conway, right? or is it 42? or maybe you shouldn't overthink it buddy :nerd:</p>
     <!-- (june 8, 2024) -->
     <script>
@@ -50,14 +49,15 @@ const resetButton = document.getElementById('resetButton');
 
 const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
-const cellSize = 15;
+const cellSize = 10;
 const rows = canvasHeight / cellSize;
 const cols = canvasWidth / cellSize;
 
 let grid = createGrid(rows, cols);
 let running = false;
 let interval;
-
+let isDragging = false;
+        
 function createGrid(rows, cols) {
     return new Array(rows).fill(null).map(() => new Array(cols).fill(0));
 }
@@ -97,7 +97,7 @@ function updateGrid(grid) {
     }
     return newGrid;
 }
-
+        
 function countNeighbors(grid, row, col) {
     let count = 0;
     for (let i = -1; i <= 1; i++) {
@@ -113,15 +113,30 @@ function countNeighbors(grid, row, col) {
     return count;
 }
 
-canvas.addEventListener('click', (event) => {
+canvas.addEventListener('mousedown', (event) => {
+    isDragging = true;
+    toggleCellState(event);
+});
+
+canvas.addEventListener('mousemove', (event) => {
+    if (isDragging) {
+        toggleCellState(event);
+    }
+});
+
+canvas.addEventListener('mouseup', () => {
+    isDragging = false;
+});
+
+function toggleCellState(event) {
     const rect = canvas.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
     const col = Math.floor(x / cellSize);
     const row = Math.floor(y / cellSize);
-    grid[row][col] = grid[row][col] ? 0 : 1;
+    grid[row][col] = 1;  // Set cell to alive while dragging
     drawGrid(grid);
-});
+}
 
 startButton.addEventListener('click', () => {
     if (!running) {
@@ -141,12 +156,11 @@ stopButton.addEventListener('click', () => {
 resetButton.addEventListener('click', () => {
     running = false;
     clearInterval(interval);
-    resizeCanvas(); 
+    grid = createGrid(rows, cols);
+    drawGrid(grid);
 });
 
-window.addEventListener('resize', resizeCanvas);
-
-resizeCanvas();
+drawGrid(grid);
     </script>
 </body>
 </html>
