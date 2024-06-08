@@ -38,6 +38,7 @@
     <button id="startButton" class="button">Start</button>
     <button id="stopButton" class="button">Stop</button>
     <button id="resetButton" class="button">Reset</button>
+    <br>
     <p>life is conway, right? or is it 42? or maybe you shouldn't overthink it buddy :nerd:</p>
     <!-- (june 8, 2024) -->
     <script>
@@ -140,11 +141,12 @@ stopButton.addEventListener('click', () => {
 resetButton.addEventListener('click', () => {
     running = false;
     clearInterval(interval);
-    grid = createGrid(rows, cols);
-    drawGrid(grid);
+    resizeCanvas(); 
 });
 
-drawGrid(grid);
+window.addEventListener('resize', resizeCanvas);
+
+resizeCanvas();
     </script>
 </body>
 </html>
