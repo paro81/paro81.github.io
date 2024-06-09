@@ -136,7 +136,7 @@
             const y = event.clientY - rect.top;
             const col = Math.floor(x / cellSize);
             const row = Math.floor(y / cellSize);
-            grid[row][col] = 1;  // Set cell to alive while dragging
+            grid[row][col] = 1; 
             drawGrid(grid);
         }
         
