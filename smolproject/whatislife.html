@@ -33,7 +33,7 @@
     </style>
 </head>
 <body>
-    <canvas id="gameCanvas" width="1366" height="620"></canvas>
+    <canvas id="gameCanvas" width="1370" height="620"></canvas>
     <br>
     <button id="startButton" class="button">Start</button>
     <button id="stopButton" class="button">Stop</button>
@@ -49,8 +49,8 @@
         const stopButton = document.getElementById('stopButton');
         const resetButton = document.getElementById('resetButton');
         
-        const canvasWidth = 1366;
-        const canvasHeight = 620;
+        const canvasWidth = canvas.width;
+        const canvasHeight = canvas.height;
         const cellSize = 10;
         const rows = canvasHeight / cellSize;
         const cols = canvasWidth / cellSize;
