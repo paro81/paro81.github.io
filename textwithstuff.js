@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 "idk what else to say... hello?", 
                 "don't go outside", 
                 "touch grass, have you seen a tree before?", 
-                "realising my errors since 2013", 
+                "realizing my errors since 2013", 
                 "minimal effort, high reward", 
                 "a lackluster of ideas, galore",
                 "somehow, in the end, i still exist.",
@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 "ERROR 404 PAGE NOT FOUND",
                 "i hate circles, squares are okay, triangles are deadly & weird",
                 "watch me, i'm gonna cook soon, just you wait."
+                "redemption arc in the works :D"
             ];
         
             var randomIndex = Math.floor(Math.random() * messages.length);
