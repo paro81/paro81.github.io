@@ -17,7 +17,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 "i hate circles, squares are okay, triangles are deadly & weird",
                 "watch me, i'm gonna cook soon, just you wait.",
                 "redemption arc in the works :D",
-                "i'm sorry that you're reading this"
+                "i'm sorry that you're reading this",
+                "when you put in the work and then things get worse:"
             ];
         
             var randomIndex = Math.floor(Math.random() * messages.length);
