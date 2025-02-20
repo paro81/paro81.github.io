@@ -18,7 +18,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 "watch me, i'm gonna cook soon, just you wait.",
                 "redemption arc in the works :D",
                 "i'm sorry that you're reading this",
-                "when you put in the work and then things get worse:"
+                "when you put in the work and then things get worse:",
+                "peggy the goat"
             ];
         
             var randomIndex = Math.floor(Math.random() * messages.length);
