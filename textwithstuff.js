@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-        // note to self: add messages below
+        //add messages below
             var messages = [
                 "in the works sometimes",
                 "pro casual geo dasher", 
