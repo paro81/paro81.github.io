@@ -1,8 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
         //add messages below
             var messages = [
-                "in the works sometimes",
-                "pro casual geo dasher", 
+                "in the works sometimes", 
                 "rhythm music is interesting", 
                 "the himothy is real", 
                 "idk what else to say... hello?", 
