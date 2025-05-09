@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 "when you put in the work and then things get worse:",
                 "peggy the goat",
                 "to cook or not to cook, there is no question. melt the frying pan",
-                "bigger than the instagram, bigger than the twitch"
+                "bigger than the instagram, bigger than the twitch",
+                "when your tung isnt sahuring so you gotta hit up those who know"
             ];
         
             var randomIndex = Math.floor(Math.random() * messages.length);
