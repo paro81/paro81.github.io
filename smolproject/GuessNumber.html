@@ -21,21 +21,20 @@
     <p id="message"></p>
 
     <script>
-        // Generate a random number between 1 and 100
         const secretNumber = Math.floor(Math.random() * 100) + 1;
 
         function checkGuess() {
-            // Get the user's guess from the input field
+            // user input
             const userGuess = document.getElementById("guessInput").value;
 
-            // Convert the user's guess to a number
+            // integer
             const guessNumber = parseInt(userGuess);
 
-            // Check if the guess is valid
+            // valid or no
             if (isNaN(guessNumber) || guessNumber < 1 || guessNumber > 100) {
                 document.getElementById("message").innerText = "Please enter a valid number between 1 and 100.";
             } else {
-                // Check if the guess is correct, too high, or too low
+                // comparing
                 if (guessNumber === secretNumber) {
                     document.getElementById("message").innerText = "Congratulations! You guessed the correct number!";
                 } else if (guessNumber > secretNumber) {
