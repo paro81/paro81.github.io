@@ -35,30 +35,30 @@
         let leftScore = 0, rightScore = 0;
 
         function draw() {
-            // Clear the canvas
+            // clear the canvas
             ctx.fillStyle = "#000";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // Draw paddles
+            //  paddles
             ctx.fillStyle = "#fff";
             ctx.fillRect(0, leftPaddleY, paddleWidth, paddleHeight);
             ctx.fillRect(canvas.width - paddleWidth, rightPaddleY, paddleWidth, paddleHeight);
 
-            // Draw ball
+            // ball
             ctx.beginPath();
             ctx.arc(ballX, ballY, 10, 0, Math.PI * 2);
             ctx.fillStyle = "#fff";
             ctx.fill();
             ctx.closePath();
 
-            // Draw scores
+            // scores
             ctx.font = "30px Arial";
             ctx.fillText(leftScore, canvas.width / 4, 50);
             ctx.fillText(rightScore, 3 * canvas.width / 4, 50);
         }
 
         function update() {
-            // Move paddles
+            // move paddles
             if (leftPaddleY >= 0 && leftPaddleY + paddleHeight <= canvas.height) {
                 if (keys["KeyW"]) leftPaddleY -= paddleSpeed;
                 if (keys["KeyS"]) leftPaddleY += paddleSpeed;
@@ -69,16 +69,16 @@
                 if (keys["ArrowDown"]) rightPaddleY += paddleSpeed;
             }
 
-            // Move ball
+            // move ball
             ballX += ballSpeedX;
             ballY += ballSpeedY;
 
-            // Ball collision with walls
+            // ball collision - walls
             if (ballY - 10 < 0 || ballY + 10 > canvas.height) {
                 ballSpeedY = -ballSpeedY;
             }
 
-            // Ball collision with paddles
+            // ball collision - paddles
             if (
                 (ballX - 10 < paddleWidth && ballY > leftPaddleY && ballY < leftPaddleY + paddleHeight) ||
                 (ballX + 10 > canvas.width - paddleWidth && ballY > rightPaddleY && ballY < rightPaddleY + paddleHeight)
@@ -86,7 +86,7 @@
                 ballSpeedX = -ballSpeedX;
             }
 
-            // Ball out of bounds
+            // out of bounds
             if (ballX - 10 < 0) {
                 rightScore++;
                 resetBall();
@@ -101,7 +101,7 @@
             ballY = canvas.height / 2;
         }
 
-        // Keyboard input
+        // input
         const keys = {};
         window.addEventListener("keydown", (e) => {
             keys[e.code] = true;
@@ -111,7 +111,7 @@
             keys[e.code] = false;
         });
 
-        // Game loop
+        // loop
         function gameLoop() {
             update();
             draw();
