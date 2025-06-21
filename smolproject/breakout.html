@@ -20,17 +20,17 @@
         const canvas = document.getElementById("breakoutCanvas");
         const ctx = canvas.getContext("2d");
 
-        // Paddle
+        // paddle
         const paddleWidth = 80, paddleHeight = 10;
         let paddleX = (canvas.width - paddleWidth) / 2;
         const paddleSpeed = 5;
 
-        // Ball
+        // ball
         let ballX = canvas.width / 2;
         let ballY = canvas.height - 30;
         let ballSpeedX = 5, ballSpeedY = -5;
 
-        // Bricks
+        // bricks
         const brickRowCount = 5, brickColumnCount = 8;
         const brickWidth = 60, brickHeight = 20, brickPadding = 10, brickOffsetTop = 30, brickOffsetLeft = 30;
         const bricks = [];
@@ -42,7 +42,7 @@
             }
         }
 
-        // Keyboard input
+        // input
         const keys = {};
         window.addEventListener("keydown", (e) => {
             keys[e.code] = true;
@@ -114,11 +114,11 @@
                 paddleX += paddleSpeed;
             }
 
-            // Move ball
+            // move ball
             ballX += ballSpeedX;
             ballY += ballSpeedY;
 
-            // Ball collision with walls
+            // collision with walls
             if (ballX + 10 > canvas.width || ballX - 10 < 0) {
                 ballSpeedX = -ballSpeedX;
             }
@@ -126,7 +126,7 @@
                 ballSpeedY = -ballSpeedY;
             }
 
-            // Ball collision with paddle
+            // collision with paddle
             if (
                 ballY + 10 > canvas.height - paddleHeight &&
                 ballX > paddleX &&
@@ -135,7 +135,7 @@
                 ballSpeedY = -ballSpeedY;
             }
             
-            // Check for collisions with bricks
+            // check collisions
             collisionDetection();
             
         }
