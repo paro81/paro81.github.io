@@ -3,8 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
             var messages = [
                 "in the works sometimes", 
                 "rhythm music is interesting", 
-                "the himothy is real", 
-                "idk what else to say... hello?", 
+                "the himothy is real",
                 "don't go outside", 
                 "touch grass, have you seen a tree before?", 
                 "realizing my errors since 2013", 
@@ -21,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 "peggy the goat",
                 "to cook or not to cook, there is no question. melt the frying pan",
                 "bigger than the instagram, bigger than the twitch",
-                "when your tung isnt sahuring so you gotta hit up those who know"
+                "fake it till you make it"
             ];
         
             var randomIndex = Math.floor(Math.random() * messages.length);
