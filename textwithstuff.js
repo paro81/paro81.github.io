@@ -20,7 +20,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 "peggy the goat",
                 "to cook or not to cook, there is no question. melt the frying pan",
                 "bigger than the instagram, bigger than the twitch",
-                "fake it till you make it"
+                "fake it till you make it",
+                "rip good ol' laptop june2017-july2025"
             ];
         
             var randomIndex = Math.floor(Math.random() * messages.length);
