@@ -21,7 +21,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 "to cook or not to cook, there is no question. melt the frying pan",
                 "bigger than the instagram, bigger than the twitch",
                 "fake it till you make it",
-                "rip good ol' laptop june2017-july2025"
+                "rip good ol' laptop june2017-july2025",
+                "why use a normal linktree type website"
             ];
         
             var randomIndex = Math.floor(Math.random() * messages.length);
