@@ -12,6 +12,33 @@
   background-color: #111;
   color: white;
 }
+
+.tetris-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 30px);
+  grid-template-rows: repeat(20, 30px);
+  gap: 1px;
+  width: fit-content;
+  margin: auto;
+  background-color: #333;
+}
+
+.tetris-grid div {
+  width: 30px;
+  height: 30px;
+  background-color: #222;
+  border: 1px solid #111;
+}
+
+.tetromino {
+  background-color: cyan;
+}
+
+.o-shape   { background-color: yellow; }
+.t-shape   { background-color: purple; }
+.j-shape   { background-color: blue; }
+.z-shape   { background-color: red; }
+
   </style>
 </head>
 <body>
