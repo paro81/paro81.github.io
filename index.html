@@ -67,12 +67,7 @@
         </style>
         <script src="textwithstuff.js"></script>
         <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var content = document.getElementById('content');
-            content.classList.add('fade-in');
-        });
-
-          const button = document.getElementById("funny");
+                  const button = document.getElementById("funny");
         
           button.addEventListener("mouseover", () => {
             const maxX = window.innerWidth - button.offsetWidth;
@@ -84,6 +79,11 @@
             button.style.left = `${randomX}px`;
             button.style.top = `${randomY}px`;
           });
+            
+            document.addEventListener("DOMContentLoaded", function() {
+            var content = document.getElementById('content');
+            content.classList.add('fade-in');
+        });
 
         </script>
     </head>
