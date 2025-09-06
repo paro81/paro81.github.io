@@ -36,8 +36,7 @@ function createRunawayButton(label, link) {
   // hover effect
   button.addEventListener("mouseenter", () => {
     button.style.backgroundColor = "#555";
-    button.style.transition =
-      "top 0.6s cubic-bezier(0.19, 1, 0.22, 1), left 0.6s cubic-bezier(0.19, 1, 0.22, 1)";
+    button.style.transition = "top 0.5s ease, left 0.5s ease";
   });
 
   button.addEventListener("mouseleave", () => {
