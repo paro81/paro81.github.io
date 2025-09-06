@@ -36,8 +36,6 @@ document.addEventListener("DOMContentLoaded", function() {
 const button = document.getElementById("funny");
 
 if (button) { // safety check in case id doesn't exist
-  button.style.transition =
-    "top 0.6s cubic-bezier(0.19, 1, 0.22, 1), left 0.6s cubic-bezier(0.19, 1, 0.22, 1)";
 
   button.addEventListener("mouseover", () => {
     const moveInterval = setInterval(() => {
