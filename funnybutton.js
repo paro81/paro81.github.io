@@ -80,7 +80,7 @@ function createRunawayButton(label, link) {
 
   // make button actually go to link
   button.addEventListener("click", () => {
-    window.open(link, "_blank");
+    window.open(link);
   });
 
   // add to page
