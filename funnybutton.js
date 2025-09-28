@@ -1,4 +1,5 @@
 //ok hopefully this funny button logic also works
+//so in theory how this would have worked is that the buttons would be at a random part of the page when loading the site, and when you tried to hover or click on them they would glide to a random part of the site and keep doing this
 const buttonsData = [
   { text: "thoughts", url: "https://paro81.github.io/notes.html" },
   { text: "trash", url: "https://paro81.github.io/media.html" },
