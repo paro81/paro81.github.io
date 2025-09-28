@@ -11,7 +11,7 @@ const buttonsData = [
   { text: "tetrio", url: "https://ch.tetr.io/u/parzo" },
   { text: "hmm", url: "https://paro81.github.io/otherstuff.html" },
 ];
-
+//have no idea how to link it to html file tho lol
 function createRunawayButton(label, link) {
   const button = document.createElement("button");
   button.textContent = label;
