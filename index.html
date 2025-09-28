@@ -30,11 +30,30 @@
             #movetextagain {
             text-align: center;
         }
-            #button-container {
-          position: relative; 
-          width: 100vw;
-          height: 100vh;
-          overflow: hidden;
+            .button {
+            display: inline-block;
+            padding: 7.5px 12.5px;
+            font: 14px Georgia, Times;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #FFF;
+            background-color: #999;
+            border: none;
+            border-radius: 0px;
+            box-shadow: 0 9px #777;
+            float: left;
+            transition-duration: 0.4s;
+        }
+
+            .button:hover {background-color: #555}
+
+            .button:active {
+            transition-duration: .1s;
+            background-color: #111;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
         }
             .content {
             opacity: 0;
@@ -51,18 +70,25 @@
             content.classList.add('fade-in');
         });
         </script>
-        <script src="funnybutton.js"></script>
     </head>
     <body>
         <div class="content" id="content">
         <h1 class="fadein">paro81/parzo</h1>
         <p><div id="message">Loading...</div></p>
         <p class="colorzwei">yup this is it, the website, official i guess, but not really. idk what else to say.</p>
-        <p class="colorzwei">there's not a lot to do here... yeah umm i broke the fucking website somehow, i'll fix it another time</p>
-        <p class="colorzwei">unfinished ig? unrelated but i wont be able to use newgrounds for now</p>
+        <p class="colorzwei">there's not a lot to do here</p>
+        <p class="colorzwei">unfinished ig? unrelated but NEWGROUNDS IS SOMEHOW UNBANNED?!</p>
         <br>
         <p><em class="fadein">j</em></p>
-        <form id="button-container"></form>
+        <a class="colorlink" href="https://paro81.github.io/notes.html"><button class="button">thoughts</button></a>
+        <a class="colorlink" href="https://paro81.github.io/media.html"><button class="button">trash</button></a>
+        <a class="colorlink" href="ultimatum.html"><button class="button">why</button></a>
+        <a class="colorlink" href="https://www.youtube.com/channel/UCIyvR-8so62F9bvozMfPqlA"><button class="button">youtube</button></a>
+        <a class="colorlink" href="https://paro81.newgrounds.com/"><button class="button">newgrounds</button></a>
+        <a class="colorlink" href="https://docs.google.com/spreadsheets/d/1r2fCobUjmPva9yHVj4yEpq1GkAZfugfhrPSEBOVbt20/edit?usp=sharing"><button class="button">GDstats</button></a>
+        <a class="colorlink" href="https://osu.ppy.sh/users/35677182"><button class="button">os</button></a>
+        <a class="colorlink" href="https://ch.tetr.io/u/parzo"><button class="button">tetrio</button></a>
+        <a class="colorlink" href="otherstuff.html"><button class="button">hmm</button></a>
         <br>
         <br>
         <br>
