@@ -26,3 +26,21 @@ function animateCursor() {
 }
 
 animateCursor();
+
+function createTrail(x, y) {
+  const trail = cursorImg.cloneNode(true);
+  trail.classList.add("cursor-trail");
+
+  trail.style.left = `${x}px`;
+  trail.style.top = `${y}px`;
+
+  document.body.appendChild(trail);
+
+  requestAnimationFrame(() => {
+    trail.style.opacity = "0";
+  });
+
+  setTimeout(() => {
+    trail.remove();
+  }, 400);
+}
