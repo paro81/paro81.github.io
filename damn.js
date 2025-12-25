@@ -22,8 +22,8 @@ document.addEventListener("mousemove", (e) => {
 
 // animation loop
 function animateCursor() {
-  x += (targetX - x) * 0.01;
-  y += (targetY - y) * 0.01;
+  x += (targetX - x) * 0.15;
+  y += (targetY - y) * 0.15;
 
   angle = (angle + 4) % 360;
 
@@ -64,7 +64,7 @@ function spawnTrail(cx, cy, startAngle) {
 
     trail.style.opacity = `${0.5 * (1 - progress)}`;
 
-    if (progress < .5) {
+    if (progress < 1) {
       requestAnimationFrame(animateTrail);
     } else {
       trail.remove();
