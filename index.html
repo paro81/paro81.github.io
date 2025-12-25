@@ -70,6 +70,27 @@
             content.classList.add('fade-in');
         });
         </script>
+        <script>
+          const cursorImg = document.getElementById("damn-bird.png");
+        
+          let x = 0, y = 0;
+          let targetX = 0, targetY = 0;
+        
+          document.addEventListener("mousemove", (e) => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+          });
+        
+          function animate() {
+            x += (targetX - x) * 0.15;
+            y += (targetY - y) * 0.15;
+            cursorImg.style.left = x + 10;
+            cursorImg.style.top = y + 10;
+            requestAnimationFrame(animate);
+          }
+        
+          animate();
+        </script>
     </head>
     <body>
         <div class="content" id="content">
