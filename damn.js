@@ -19,8 +19,8 @@ document.addEventListener("mousemove", (e) => {
 
 // follow
 function animateCursor() {
-  x += (targetX - x) * 0.05;
-  y += (targetY - y) * 0.05;
+  x += (targetX - x) * 0.1;
+  y += (targetY - y) * 0.1;
 
   angle += 6; // rotation speed
   cursorImg.style.left = `${x}px`;
