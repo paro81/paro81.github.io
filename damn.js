@@ -22,8 +22,8 @@ document.addEventListener("mousemove", (e) => {
 
 // animation loop
 function animateCursor() {
-  x += (targetX - x) * 0.125;
-  y += (targetY - y) * 0.125;
+  x += (targetX - x) * 0.01;
+  y += (targetY - y) * 0.01;
 
   angle = (angle + 4) % 360;
 
