@@ -65,12 +65,7 @@
         </style>
         <script src="textwithstuff.js"></script>
         <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            var content = document.getElementById('content');
-            content.classList.add('fade-in');
-        });
-            
-            const cursorImg = document.getElementById("damn-bird.png");
+        const cursorImg = document.getElementById("damn-bird.png");
         
           let x = 0, y = 0;
           let targetX = 0, targetY = 0;
@@ -87,8 +82,12 @@
             cursorImg.style.top = y + "px";
             requestAnimationFrame(animate);
           }
-        
           animate();
+            
+        document.addEventListener("DOMContentLoaded", function() {
+            var content = document.getElementById('content');
+            content.classList.add('fade-in');
+        });
         </script>
     </head>
     <body>
