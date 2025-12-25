@@ -5,8 +5,9 @@ const IMAGE_SIZE = 32;
 cursorImg.style.width = `${IMAGE_SIZE}px`;
 cursorImg.style.height = `${IMAGE_SIZE}px`;
 
-let x = window.innerWidth / 2;
-let y = window.innerHeight / 2;
+const size = cursorImg.offsetWidth;
+let x = Math.random() * (window.innerWidth - size) + size / 2;
+let y = Math.random() * (window.innerHeight - size) + size / 2;
 let targetX = x;
 let targetY = y;
 
