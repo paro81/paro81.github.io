@@ -15,7 +15,7 @@ document.addEventListener("mousemove", (e) => {
   targetX = e.clientX;
   targetY = e.clientY;
 
-  createTrail(e.clientX, e.clientY);
+  createTrail(x, y);
 });
 
 // fllow
