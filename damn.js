@@ -64,7 +64,7 @@ function spawnTrail(cx, cy, startAngle) {
 
     trail.style.opacity = `${0.5 * (1 - progress)}`;
 
-    if (progress < 0) {
+    if (progress < 3) {
       requestAnimationFrame(animateTrail);
     } else {
       trail.remove();
