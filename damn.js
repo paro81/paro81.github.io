@@ -1,6 +1,6 @@
 const cursorImg = document.getElementById("cursorImage");
 
-const IMAGE_SIZE = 24;
+const IMAGE_SIZE = 32;
 
 cursorImg.style.width = `${IMAGE_SIZE}px`;
 cursorImg.style.height = `${IMAGE_SIZE}px`;
