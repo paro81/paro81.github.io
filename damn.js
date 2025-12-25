@@ -1,11 +1,13 @@
 const cursorImg = document.getElementById("cursorImage");
 
+// position
 let x = Math.random() * window.innerWidth;
 let y = Math.random() * window.innerHeight;
 let targetX = x;
 let targetY = y;
-let angle = 0;
 
+// initial rotation
+let angle = Math.random() * 360;
 cursorImg.style.left = `${x}px`;
 cursorImg.style.top = `${y}px`;
 
@@ -14,15 +16,17 @@ document.addEventListener("mousemove", (e) => {
   targetX = e.clientX;
   targetY = e.clientY;
 
-  createTrail(x, y, angle);
+  // spawn trail 
+  spawnTrail(x, y, angle);
 });
 
-// follow
+// animation loop
 function animateCursor() {
-  x += (targetX - x) * 0.1;
-  y += (targetY - y) * 0.1;
+  x += (targetX - x) * 0.15;
+  y += (targetY - y) * 0.15;
 
-  angle += 6; // rotation speed
+  angle = (angle + 4) % 360;
+
   cursorImg.style.left = `${x}px`;
   cursorImg.style.top = `${y}px`;
   cursorImg.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`;
@@ -32,20 +36,40 @@ function animateCursor() {
 
 animateCursor();
 
-// trail
-function createTrail(cx, cy, parentAngle) {
+// taril
+function spawnTrail(cx, cy, startAngle) {
   const trail = cursorImg.cloneNode(true);
   trail.className = "cursor-trail";
 
   trail.style.left = `${cx}px`;
   trail.style.top = `${cy}px`;
-  trail.style.transform = `translate(-50%, -50%) rotate(${parentAngle}deg)`;
+  trail.style.opacity = "0.5";
+
+  // speed
+  let trailAngle = startAngle;
+  const trailSpeed = 6 + Math.random() * 3; // funny variation
+  const lifetime = 600;
+  const startTime = performance.now();
 
   document.body.appendChild(trail);
 
-  requestAnimationFrame(() => {
-    trail.style.opacity = "0";
-  });
+  function animateTrail(now) {
+    const elapsed = now - startTime;
+    const progress = elapsed / lifetime;
 
-  setTimeout(() => trail.remove(), 600);
+    trailAngle += trailSpeed;
+
+    trail.style.transform =
+      `translate(-50%, -50%) rotate(${trailAngle}deg)`;
+
+    trail.style.opacity = `${0.5 * (1 - progress)}`;
+
+    if (progress < 1) {
+      requestAnimationFrame(animateTrail);
+    } else {
+      trail.remove();
+    }
+  }
+
+  requestAnimationFrame(animateTrail);
 }
