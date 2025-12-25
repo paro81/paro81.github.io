@@ -43,5 +43,5 @@ function createTrail(x, y) {
 
   setTimeout(() => {
     trail.remove();
-  }, 400);
+  }, 800);
 }
