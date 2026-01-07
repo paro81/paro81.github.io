@@ -2,75 +2,136 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radiation Absorption Simulator</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Particle Radiation Interaction Simulator</title>
     <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f4f7f6; display: flex; flex-direction: column; align-items: center; padding: 20px; }
-        .container { background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 90%; max-width: 800px; }
-        h1 { color: #2c3e50; text-align: center; }
-        p { color: #7f8c8d; line-height: 1.6; }
-        canvas { margin-top: 20px; }
-        .controls { margin-top: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
-        .info-box { margin-top: 20px; padding: 15px; background: #e8f4fd; border-left: 5px solid #3498db; font-size: 0.9rem; }
+        body { font-family: sans-serif; background: #111; color: #eee; display: flex; flex-direction: column; align-items: center; }
+        canvas { background: #000; border: 2px solid #444; border-radius: 8px; cursor: crosshair; }
+        .controls { background: #222; padding: 20px; border-radius: 8px; margin-top: 15px; display: flex; gap: 20px; align-items: center; }
+        select, button { padding: 8px; border-radius: 4px; border: none; }
+        .legend { display: flex; gap: 15px; margin-bottom: 10px; }
+        .dot { height: 12px; width: 12px; border-radius: 50%; display: inline-block; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Material Radiation Absorption</h1>
-    <p>This simulation shows how different materials reduce the intensity of <b>662 keV Gamma Rays</b> based on the Beer-Lambert Law: <i>I = I₀e⁻ᶣˣ</i>.</p>
+    <h1>Particle Shielding Interaction</h1>
     
-    <canvas id="shieldingChart"></canvas>
-
-    <div class="info-box">
-        <strong>Physics Note:</strong> Lead is the most effective because of its high atomic number and density. Plastic (HDPE) and Water have similar curves because they are both low-density, hydrogen-rich materials.
+    <div class="legend">
+        <span><span class="dot" style="background:#ff4d4d"></span> Alpha (Heavy)</span>
+        <span><span class="dot" style="background:#4dff4d"></span> Beta (Fast)</span>
+        <span><span class="dot" style="background:#4da6ff"></span> Gamma (Wave)</span>
     </div>
-</div>
+
+    <canvas id="simCanvas" width="800" height="400"></canvas>
+
+    <div class="controls">
+        <div>
+            <label>Shield Material: </label>
+            <select id="materialSelect">
+                <option value="none">None (Vacuum)</option>
+                <option value="plastic">Polyethylene (Plastic)</option>
+                <option value="aluminum">Aluminum</option>
+                <option value="regolith">Lunar Regolith</option>
+                <option value="lead">Lead (Heavy Metal)</option>
+            </select>
+        </div>
+        <button onclick="clearCanvas()">Clear Trails</button>
+        <div id="stats">Blocked: 0%</div>
+    </div>
 
 <script>
-    const ctx = document.getElementById('shieldingChart').getContext('2d');
-    
-    // thickness data points (0 to 25 cm)
-    const labels = Array.from({length: 26}, (_, i) => i);
-    
-    // attenuation coefficients (mu) in cm^-1
-    const materials = [
-        { name: 'Lead', mu: 1.250, color: '#e74c3c' },
-        { name: 'Aluminum', mu: 0.202, color: '#95a5a6' },
-        { name: 'Water', mu: 0.086, color: '#3498db' },
-        { name: 'Plastic (HDPE)', mu: 0.082, color: '#2ecc71' }
-    ];
+    const canvas = document.getElementById('simCanvas');
+    const ctx = canvas.getContext('2d');
+    const materialSelect = document.getElementById('materialSelect');
 
-    const datasets = materials.map(m => ({
-        label: m.name,
-        data: labels.map(x => (100 * Math.exp(-m.mu * x)).toFixed(2)),
-        borderColor: m.color,
-        backgroundColor: m.color + '22',
-        borderWidth: 3,
-        tension: 0.3,
-        fill: false
-    }));
+    let particles = [];
+    const shieldX = 400; // Position of the shield
+    const shieldWidth = 80;
 
-    new Chart(ctx, {
-        type: 'line',
-        data: { labels: labels, datasets: datasets },
-        options: {
-            responsive: true,
-            plugins: {
-                title: { display: true, text: 'Radiation Intensity vs. Material Thickness' },
-                tooltip: { callbacks: { label: (ctx) => `${ctx.dataset.label}: ${ctx.raw}% intensity` } }
-            },
-            scales: {
-                x: { title: { display: true, text: 'Thickness (cm)' } },
-                y: { 
-                    title: { display: true, text: 'Intensity Remaining (%)' },
-                    min: 0, max: 100
+    const materialProps = {
+        "none":     { alpha: 1.0, beta: 1.0, gamma: 1.0,  color: 'rgba(0,0,0,0)' },
+        "plastic":  { alpha: 0.0, beta: 0.4, gamma: 0.92, color: 'rgba(46, 204, 113, 0.3)' },
+        "aluminum": { alpha: 0.0, beta: 0.1, gamma: 0.82, color: 'rgba(149, 165, 166, 0.5)' },
+        "regolith": { alpha: 0.0, beta: 0.0, gamma: 0.70, color: 'rgba(211, 84, 0, 0.5)' },
+        "lead":     { alpha: 0.0, beta: 0.0, gamma: 0.15, color: 'rgba(127, 140, 141, 0.8)' }
+    };
+
+    class Particle {
+        constructor() {
+            this.reset();
+        }
+
+        reset() {
+            const typeRand = Math.random();
+            if (typeRand < 0.33) {
+                this.type = 'alpha'; this.color = '#ff4d4d'; this.speed = 2; this.size = 6;
+            } else if (typeRand < 0.66) {
+                this.type = 'beta'; this.color = '#4dff4d'; this.speed = 5; this.size = 2;
+            } else {
+                this.type = 'gamma'; this.color = '#4da6ff'; this.speed = 8; this.size = 1;
+            }
+            
+            this.x = 0;
+            this.y = Math.random() * canvas.height;
+            this.active = true;
+        }
+
+        update() {
+            if (!this.active) return;
+
+            const mat = materialSelect.value;
+            const props = materialProps[mat];
+
+            // Collision Detection
+            if (this.x >= shieldX && this.x <= shieldX + 5) {
+                const passProbability = props[this.type];
+                if (Math.random() > passProbability) {
+                    this.active = false; // Particle is absorbed
                 }
             }
-        }
-    });
-</script>
 
+            this.x += this.speed;
+            if (this.x > canvas.width) this.reset();
+        }
+
+        draw() {
+            if (!this.active) return;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+        }
+    }
+
+    // Initialize particles
+    for(let i=0; i<60; i++) particles.push(new Particle());
+
+    function animate() {
+        // Semi-transparent clear creates a "trail" effect
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw Shield
+        const mat = materialSelect.value;
+        ctx.fillStyle = materialProps[mat].color;
+        ctx.fillRect(shieldX, 0, shieldWidth, canvas.height);
+        ctx.strokeStyle = "#555";
+        ctx.strokeRect(shieldX, 0, shieldWidth, canvas.height);
+
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+
+        requestAnimationFrame(animate);
+    }
+
+    function clearCanvas() {
+        ctx.clearRect(0,0, canvas.width, canvas.height);
+        particles.forEach(p => p.reset());
+    }
+
+    animate();
+</script>
 </body>
 </html>
