@@ -2,135 +2,160 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Particle Radiation Interaction Simulator</title>
+    <title>Radiation Shielding Analytics</title>
     <style>
-        body { font-family: sans-serif; background: #111; color: #eee; display: flex; flex-direction: column; align-items: center; }
-        canvas { background: #000; border: 2px solid #444; border-radius: 8px; cursor: crosshair; }
-        .controls { background: #222; padding: 20px; border-radius: 8px; margin-top: 15px; display: flex; gap: 20px; align-items: center; }
-        select, button { padding: 8px; border-radius: 4px; border: none; }
-        .legend { display: flex; gap: 15px; margin-bottom: 10px; }
-        .dot { height: 12px; width: 12px; border-radius: 50%; display: inline-block; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0b0f19; color: #eee; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        .main-layout { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        canvas { background: #000; border: 2px solid #334155; border-radius: 50%; box-shadow: 0 0 30px rgba(0,0,0,0.5); }
+        
+        .panel { background: #1e293b; padding: 20px; border-radius: 12px; border: 1px solid #334155; width: 350px; }
+        h1 { color: #38bdf8; margin-top: 0; }
+        
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 15px; }
+        .stat-card { background: #0f172a; padding: 10px; border-radius: 8px; text-align: center; border: 1px solid #334155; }
+        .stat-val { font-size: 1.2rem; font-weight: bold; display: block; margin-top: 5px; }
+        
+        .alpha-text { color: #ff4d4d; }
+        .beta-text { color: #4dff4d; }
+        .gamma-text { color: #4da6ff; }
+        
+        .controls { margin-bottom: 20px; width: 100%; text-align: center; }
+        select { background: #334155; color: white; padding: 10px; border-radius: 6px; border: none; font-size: 1rem; cursor: pointer; }
+        button { background: #38bdf8; color: #0f172a; padding: 10px 20px; border-radius: 6px; border: none; font-weight: bold; cursor: pointer; margin-left: 10px; }
+        button:hover { background: #7dd3fc; }
     </style>
 </head>
 <body>
 
-    <h1>Particle Shielding Interaction</h1>
-    
-    <div class="legend">
-        <span><span class="dot" style="background:#ff4d4d"></span> Alpha (Heavy)</span>
-        <span><span class="dot" style="background:#4dff4d"></span> Beta (Fast)</span>
-        <span><span class="dot" style="background:#4da6ff"></span> Gamma (Wave)</span>
-    </div>
-
-    <canvas id="simCanvas" width="800" height="400"></canvas>
+    <h1>Radiation Shielding Analytics</h1>
 
     <div class="controls">
-        <div>
-            <label>Shield Material: </label>
-            <select id="materialSelect">
-                <option value="none">None (Vacuum)</option>
-                <option value="plastic">Polyethylene (Plastic)</option>
-                <option value="aluminum">Aluminum</option>
-                <option value="regolith">Lunar Regolith</option>
-                <option value="lead">Lead (Heavy Metal)</option>
-            </select>
+        <label>Active Shield: </label>
+        <select id="materialSelect" onchange="resetStats()">
+            <option value="none">No Shield (Vacuum)</option>
+            <option value="plastic">Polyethylene (Plastic)</option>
+            <option value="aluminum">Aluminum Shell</option>
+            <option value="regolith">Lunar Regolith</option>
+            <option value="lead">Lead Plate</option>
+        </select>
+        <button onclick="resetStats()">Reset Counters</button>
+    </div>
+
+    <div class="main-layout">
+        <canvas id="simCanvas" width="500" height="500"></canvas>
+
+        <div class="panel">
+            <h3 style="margin-top:0">Absorption Data</h3>
+            <p style="font-size: 0.8rem; color: #94a3b8;">Particles captured by the shield material.</p>
+            <div class="stats-grid">
+                <div class="stat-card">Alpha<span id="abs-alpha" class="stat-val alpha-text">0</span></div>
+                <div class="stat-card">Beta<span id="abs-beta" class="stat-val beta-text">0</span></div>
+                <div class="stat-card">Gamma<span id="abs-gamma" class="stat-val gamma-text">0</span></div>
+            </div>
+
+            <hr style="border: 0; border-top: 1px solid #334155; margin: 20px 0;">
+
+            <h3>Passing Data (Dose)</h3>
+            <p style="font-size: 0.8rem; color: #94a3b8;">Particles that penetrated the interior.</p>
+            <div class="stats-grid">
+                <div class="stat-card">Alpha<span id="pass-alpha" class="stat-val alpha-text">0</span></div>
+                <div class="stat-card">Beta<span id="pass-beta" class="stat-val beta-text">0</span></div>
+                <div class="stat-card">Gamma<span id="pass-gamma" class="stat-val gamma-text">0</span></div>
+            </div>
+            
+            <div style="margin-top:20px; background: #0f172a; padding: 15px; border-radius: 8px;">
+                <strong>Efficiency:</strong> <span id="efficiency">0%</span>
+            </div>
         </div>
-        <button onclick="clearCanvas()">Clear Trails</button>
-        <div id="stats">Blocked: 0%</div>
     </div>
 
 <script>
     const canvas = document.getElementById('simCanvas');
     const ctx = canvas.getContext('2d');
-    const materialSelect = document.getElementById('materialSelect');
+    const centerX = 250, centerY = 250, podRadius = 70;
 
-    let particles = [];
-    const shieldX = 400; // Position of the shield
-    const shieldWidth = 80;
+    let stats = {
+        abs: { alpha: 0, beta: 0, gamma: 0 },
+        pass: { alpha: 0, beta: 0, gamma: 0 }
+    };
 
     const materialProps = {
-        "none":     { alpha: 1.0, beta: 1.0, gamma: 1.0,  color: 'rgba(0,0,0,0)' },
-        "plastic":  { alpha: 0.0, beta: 0.4, gamma: 0.92, color: 'rgba(46, 204, 113, 0.3)' },
-        "aluminum": { alpha: 0.0, beta: 0.1, gamma: 0.82, color: 'rgba(149, 165, 166, 0.5)' },
-        "regolith": { alpha: 0.0, beta: 0.0, gamma: 0.70, color: 'rgba(211, 84, 0, 0.5)' },
-        "lead":     { alpha: 0.0, beta: 0.0, gamma: 0.15, color: 'rgba(127, 140, 141, 0.8)' }
+        "none":     { alpha: 1.0, beta: 1.0, gamma: 1.0, color: 'rgba(255,255,255,0.05)' },
+        "plastic":  { alpha: 0.0, beta: 0.3, gamma: 0.90, color: 'rgba(34, 197, 94, 0.4)' },
+        "aluminum": { alpha: 0.0, beta: 0.1, gamma: 0.80, color: 'rgba(148, 163, 184, 0.6)' },
+        "regolith": { alpha: 0.0, beta: 0.02, gamma: 0.60, color: 'rgba(245, 158, 11, 0.5)' },
+        "lead":     { alpha: 0.0, beta: 0.0, gamma: 0.15, color: 'rgba(100, 116, 139, 0.9)' }
     };
 
     class Particle {
-        constructor() {
-            this.reset();
-        }
-
-        reset() {
-            const typeRand = Math.random();
-            if (typeRand < 0.33) {
-                this.type = 'alpha'; this.color = '#ff4d4d'; this.speed = 2; this.size = 6;
-            } else if (typeRand < 0.66) {
-                this.type = 'beta'; this.color = '#4dff4d'; this.speed = 5; this.size = 2;
-            } else {
-                this.type = 'gamma'; this.color = '#4da6ff'; this.speed = 8; this.size = 1;
-            }
+        constructor() { this.spawn(); }
+        spawn() {
+            const angle = Math.random() * Math.PI * 2;
+            const dist = 300;
+            this.x = centerX + Math.cos(angle) * dist;
+            this.y = centerY + Math.sin(angle) * dist;
+            const targetAngle = angle + Math.PI + (Math.random() - 0.5) * 1.2;
             
-            this.x = 0;
-            this.y = Math.random() * canvas.height;
+            const r = Math.random();
+            if (r < 0.33) { this.type = 'alpha'; this.color = '#ff4d4d'; this.speed = 1.5; this.size = 5; }
+            else if (r < 0.66) { this.type = 'beta'; this.color = '#4dff4d'; this.speed = 3.5; this.size = 2; }
+            else { this.type = 'gamma'; this.color = '#4da6ff'; this.speed = 6; this.size = 1; }
+
+            this.vx = Math.cos(targetAngle) * this.speed;
+            this.vy = Math.sin(targetAngle) * this.speed;
             this.active = true;
+            this.checked = false;
         }
 
         update() {
-            if (!this.active) return;
+            this.x += this.vx; this.y += this.vy;
+            const d = Math.sqrt((this.x - centerX)**2 + (this.y - centerY)**2);
 
-            const mat = materialSelect.value;
-            const props = materialProps[mat];
-
-            // Collision Detection
-            if (this.x >= shieldX && this.x <= shieldX + 5) {
-                const passProbability = props[this.type];
-                if (Math.random() > passProbability) {
-                    this.active = false; // Particle is absorbed
+            if (!this.checked && d < podRadius) {
+                const p = materialProps[document.getElementById('materialSelect').value][this.type];
+                if (Math.random() > p) {
+                    stats.abs[this.type]++;
+                    this.active = false;
+                } else {
+                    stats.pass[this.type]++;
                 }
+                this.checked = true;
+                updateDisplay();
             }
-
-            this.x += this.speed;
-            if (this.x > canvas.width) this.reset();
+            if (d > 400 || !this.active) this.spawn();
         }
 
         draw() {
-            if (!this.active) return;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-            ctx.fillStyle = this.color;
-            ctx.fill();
+            ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+            ctx.fillStyle = this.color; ctx.fill();
         }
     }
 
-    // Initialize particles
-    for(let i=0; i<60; i++) particles.push(new Particle());
+    let particles = Array.from({length: 80}, () => new Particle());
+
+    function updateDisplay() {
+        for(let type of ['alpha', 'beta', 'gamma']) {
+            document.getElementById(`abs-${type}`).innerText = stats.abs[type];
+            document.getElementById(`pass-${type}`).innerText = stats.pass[type];
+        }
+        const total = (stats.abs.alpha + stats.abs.beta + stats.abs.gamma + stats.pass.alpha + stats.pass.beta + stats.pass.gamma) || 1;
+        const blocked = (stats.abs.alpha + stats.abs.beta + stats.abs.gamma);
+        document.getElementById('efficiency').innerText = ((blocked/total)*100).toFixed(1) + "%";
+    }
+
+    function resetStats() {
+        stats = { abs: { alpha: 0, beta: 0, gamma: 0 }, pass: { alpha: 0, beta: 0, gamma: 0 } };
+        updateDisplay();
+    }
 
     function animate() {
-        // Semi-transparent clear creates a "trail" effect
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // Draw Shield
-        const mat = materialSelect.value;
-        ctx.fillStyle = materialProps[mat].color;
-        ctx.fillRect(shieldX, 0, shieldWidth, canvas.height);
-        ctx.strokeStyle = "#555";
-        ctx.strokeRect(shieldX, 0, shieldWidth, canvas.height);
-
-        particles.forEach(p => {
-            p.update();
-            p.draw();
-        });
-
+        ctx.fillStyle = 'rgba(11, 15, 25, 0.3)'; ctx.fillRect(0,0,500,500);
+        ctx.beginPath(); ctx.arc(centerX, centerY, podRadius, 0, Math.PI*2);
+        ctx.fillStyle = materialProps[document.getElementById('materialSelect').value].color;
+        ctx.fill(); ctx.strokeStyle = '#38bdf8'; ctx.stroke();
+        particles.forEach(p => { p.update(); p.draw(); });
         requestAnimationFrame(animate);
     }
-
-    function clearCanvas() {
-        ctx.clearRect(0,0, canvas.width, canvas.height);
-        particles.forEach(p => p.reset());
-    }
-
     animate();
 </script>
 </body>
