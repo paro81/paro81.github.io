@@ -151,30 +151,67 @@
 </section>
 
 <section>
+  <h2>🧬 Biology — Radiation & Human Health</h2>
+  <p>
+    This biology section focuses on how space radiation affects human cells and health, directly addressing the research question by linking radiation exposure to biological damage and long-term risk.
+  </p>
+
+  <h3>Types of Space Radiation</h3>
+  <ul>
+    <li><strong>Galactic Cosmic Rays (GCRs):</strong> Extremely high-energy protons and heavy ions (e.g. iron nuclei) originating outside the solar system. Highly penetrating and difficult to shield.</li>
+    <li><strong>Solar Energetic Particles (SEPs):</strong> High-energy protons released during solar flares and coronal mass ejections, capable of delivering acute radiation doses.</li>
+    <li><strong>Trapped Radiation:</strong> Protons and electrons confined within Earth’s Van Allen belts, affecting astronauts in low-Earth orbit.</li>
+  </ul>
+
+  <h3>Cellular & DNA Damage Mechanisms</h3>
+  <p>
+    Space radiation is ionising, meaning it has sufficient energy to remove electrons from atoms within biological tissue. This leads to direct DNA strand breaks and indirect damage via free radicals produced when radiation interacts with water molecules inside cells.
+  </p>
+  <ul>
+    <li>Single-strand DNA breaks are often repairable.</li>
+    <li>Double-strand breaks are harder to repair and may cause permanent mutations.</li>
+    <li>Incorrect repair can lead to uncontrolled cell division and cancer.</li>
+  </ul>
+
+  <h3>Health Risks & Dose Exposure</h3>
+  <ul>
+    <li>Radiation exposure is measured in sieverts (Sv), accounting for biological impact.</li>
+    <li>Earth background radiation: ~2–3 mSv/year.</li>
+    <li>ISS exposure: ~100–150 mSv/year.</li>
+    <li>Deep-space missions may result in several hundred mSv over months.</li>
+  </ul>
+  <p>
+    Risk increases cumulatively with dose and mission duration. No level of ionising radiation is considered completely safe.
+  </p>
+
+  <h3>Why Long-Duration Missions Increase Risk</h3>
+  <p>
+    Beyond low-Earth orbit, Earth’s magnetic protection weakens significantly. This results in higher daily radiation doses, accumulation of cellular damage over time, and increased lifetime cancer risk for astronauts.
+  </p>
+</section>
+
+<section>
   <h2>🧬 Interdisciplinary Approach</h2>
   <div class="grid">
     <div class="card">
-      <h3>Biology</h3>
-      <ul>
-        <li>Radiation causes DNA strand breaks and oxidative stress.</li>
-        <li>High-LET radiation produces complex, hard-to-repair damage.</li>
-        <li>Reduced dose lowers mutation rates and cancer risk.</li>
-      </ul>
-    </div>
-    <div class="card">
       <h3>Chemistry</h3>
       <ul>
-        <li>Atomic number and hydrogen content govern radiation interaction.</li>
-        <li>Hydrogen-rich materials moderate neutrons effectively.</li>
-        <li>Low-Z materials minimize secondary radiation production.</li>
+        <li>Atomic number and hydrogen content determine radiation interaction.</li>
+        <li>Hydrogen-rich materials reduce secondary radiation.</li>
       </ul>
     </div>
     <div class="card">
       <h3>Environmental Systems & Societies (ESS)</h3>
       <ul>
-        <li>Material production has associated energy use and carbon emissions.</li>
-        <li>Launch mass strongly influences fuel consumption and emissions.</li>
-        <li>Sustainable material choice supports long-duration mission viability.</li>
+        <li>Material mass affects fuel use and emissions.</li>
+        <li>Multi-functional materials improve sustainability.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Engineering & Design</h3>
+      <ul>
+        <li>Layered shielding improves protection per unit mass.</li>
+        <li>Smart habitat design reduces exposure.</li>
       </ul>
     </div>
   </div>
@@ -255,81 +292,60 @@
 <section>
   <h2>📊 Results & Data Analysis</h2>
   <p>
-    Data from multiple peer-reviewed simulation studies were normalised by mass to allow fair comparison between materials. The results consistently demonstrate that hydrogen-rich materials reduce biologically harmful radiation dose more effectively than aluminium.
+    Results from biological, chemical, and materials science studies were synthesised to evaluate how radiation exposure translates into health risk, and how material choice alters this outcome. The findings consistently show that both <strong>dose magnitude</strong> and <strong>mission duration</strong> are critical determinants of biological harm.
   </p>
 
-  <div class="grid">
-    <div class="card">
-      <h3>Relative Dose Reduction by Material</h3>
-      <svg viewBox="0 0 300 200" width="100%">
+  <h3>Biological Risk Trends</h3>
+  <ul>
+    <li>Astronauts on the ISS receive approximately 100–150 mSv per year, significantly higher than Earth’s natural background (~2–3 mSv/year).</li>
+    <li>Projected deep-space missions (e.g. Mars) may expose astronauts to 600–1000 mSv cumulatively.</li>
+    <li>Higher cumulative dose correlates with increased DNA double-strand breaks and long-term cancer risk.</li>
+  </ul>
+
+  <h3>Effect of Shielding on Dose Reduction</h3>
+  <p>
+    Comparative analysis shows that hydrogen-rich materials consistently reduce dose equivalent more effectively per unit mass than aluminium or high-Z metals. This directly lowers the probability of cellular mutation and tissue damage.
+  </p>
+
+  <div class="grid" style="grid-template-columns: 1fr 1fr; align-items:center; gap:1.5rem;">
+    <div class="card" style="max-width:420px;">
+      <h3>Cumulative Dose Over Mission Duration</h3>
+      <svg viewBox="0 0 300 200" width="100%" height="180">
         <polyline points="20,160 80,120 140,90 200,60 260,40" fill="none" stroke="#f6ad55" stroke-width="2" />
         <polyline points="20,160 80,135 140,115 200,95 260,80" fill="none" stroke="#63b3ed" stroke-width="2" />
         <polyline points="20,160 80,145 140,130 200,120 260,110" fill="none" stroke="#4fd1c5" stroke-width="2" />
-        <text x="10" y="20" font-size="12">↑ Cumulative Dose (mSv)</text>
-        <text x="200" y="190" font-size="10">Mission Duration (months)</text>
+        <text x="10" y="20" font-size="12">↑ Dose (mSv)</text>
+        <text x="200" y="190" font-size="10">Mission Duration</text>
       </svg>
-      <p class="source">Figure 2: Simulated cumulative radiation dose over mission duration behind aluminium, water, and polyethylene shielding. Trends derived from NASA OLTARIS simulations and HZETRN transport models (NASA, 2014; Slaba et al., <em>Life Sciences in Space Research</em>, 2016).</p>
+      <p class="source">Figure 2: Relative cumulative radiation dose behind aluminium (orange), water (blue), and polyethylene (green) shielding. Trends based on NASA OLTARIS and HZETRN models.</p>
     </div>
-  </div>
-
-  <div class="card" style="margin-top:1.5rem;">
-    <h3>Graph Interpretation</h3>
-    <p>
-      Figure 2 demonstrates a clear divergence in cumulative radiation dose as mission duration increases. Aluminium shielding shows the steepest dose accumulation, indicating lower effectiveness against high-energy Galactic Cosmic Rays. Water provides a moderate reduction due to its hydrogen content, while polyethylene consistently results in the lowest cumulative dose. This trend supports the hypothesis that hydrogen-rich, low‑atomic‑number materials are more effective at reducing biologically harmful radiation per unit mass. The reduced slope for polyethylene reflects improved neutron moderation and reduced secondary particle production, which directly correlates with lower cellular DNA damage risk.
-    </p>
+    <div class="card">
+      <h3>Graph Interpretation</h3>
+      <p>
+        The graph shows that cumulative radiation dose increases with mission duration for all shielding materials; however, the rate of increase differs significantly depending on material composition. Aluminium shielding exhibits the steepest dose increase, indicating lower attenuation efficiency against high-energy particles. In contrast, polyethylene shows the slowest increase, demonstrating superior dose reduction per unit mass due to its high hydrogen content. Water provides intermediate protection, outperforming aluminium but remaining less effective than polyethylene. This trend supports the conclusion that hydrogen-rich materials reduce biological radiation exposure more effectively during long-duration space missions.
+      </p>
+    </div>
   </div>
 
   <div class="card" style="margin-top:1.5rem;">
     <h3>Quantitative Comparison Table</h3>
-    <p class="source">Table 1: Comparative radiation shielding performance of common materials using normalized initial radiation of 100 units.</p>
+    <p class="source">Table 1: Normalised comparison of radiation attenuation and efficiency for selected materials.</p>
     <div style="overflow-x:auto;">
       <table style="width:100%; border-collapse:collapse; font-size:0.9rem;">
         <thead>
-          <tr style="color:var(--accent); text-align:left; border-bottom:1px solid rgba(255,255,255,0.2);">
-            <th>Material</th>
-            <th>Initial Radiation</th>
-            <th>Attenuation Factor</th>
-            <th>Radiation After Shielding</th>
-            <th>Radiation Reduced</th>
-            <th>% Reduction</th>
-            <th>Density (g/cm³)</th>
-            <th>Efficiency</th>
+          <tr style="color:var(--accent); border-bottom:1px solid rgba(255,255,255,0.2);">
+            <th>Material</th><th>% Reduction</th><th>Density (g/cm³)</th><th>Efficiency</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Aluminium</td><td>100</td><td>0.3</td><td>70</td><td>30</td><td>30%</td><td>2.7</td><td>11.1</td>
-          </tr>
-          <tr>
-            <td>Lead</td><td>100</td><td>0.8</td><td>20</td><td>80</td><td>80%</td><td>11.3</td><td>7.1</td>
-          </tr>
-          <tr>
-            <td>Concrete</td><td>100</td><td>0.6</td><td>40</td><td>60</td><td>60%</td><td>2.4</td><td>25.0</td>
-          </tr>
-          <tr>
-            <td>Plastic (Generic)</td><td>100</td><td>0.2</td><td>80</td><td>20</td><td>20%</td><td>0.9</td><td>22.2</td>
-          </tr>
-          <tr>
-            <td>Polyethylene (PE/UHMWPE)</td><td>100</td><td>0.4</td><td>60</td><td>40</td><td>40%</td><td>0.95</td><td>42.1</td>
-          </tr>
-          <tr>
-            <td>Water</td><td>100</td><td>0.35</td><td>65</td><td>35</td><td>35%</td><td>1.0</td><td>35.0</td>
-          </tr>
-          <tr>
-            <td>Boron Nitride Nanotubes (BNNTs)</td><td>100</td><td>0.45</td><td>55</td><td>45</td><td>45%</td><td>1.4</td><td>32.1</td>
-          </tr>
+          <tr><td>Aluminium</td><td>30%</td><td>2.7</td><td>11.1</td></tr>
+          <tr><td>Lead</td><td>80%</td><td>11.3</td><td>7.1</td></tr>
+          <tr><td>Polyethylene</td><td>40%</td><td>0.95</td><td>42.1</td></tr>
+          <tr><td>Water</td><td>35%</td><td>1.0</td><td>35.0</td></tr>
+          <tr><td>BNNTs</td><td>45%</td><td>1.4</td><td>32.1</td></tr>
         </tbody>
       </table>
     </div>
-  </div>
-
-  <div class="card" style="margin-top:1.5rem;">
-    <h3>Key Quantitative Findings</h3>
-    <ul>
-      <li>Hydrogen-rich polymers reduce dose equivalent by up to ~30–40% more than aluminium at equal mass.</li>
-      <li>Metal hydrides provide the highest hydrogen atom density and best neutron moderation.</li>
-      <li>High-Z materials increase secondary particle production despite high density.</li>
-    </ul>
   </div>
 </section>
 
@@ -434,9 +450,11 @@
 <section>
   <h2>🔮 Future Research</h2>
   <ul>
-    <li>Development of advanced hydrogenated nanomaterials (e.g., BNNTs).</li>
-    <li>Long-term biological studies under combined radiation and microgravity.</li>
-    <li>In-situ resource utilization for shielding materials on Mars.</li>
+    <li><strong>Advanced shielding materials:</strong> Further testing of hydrogenated boron nitride nanotubes and metal hydrides for flexible, lightweight shielding.</li>
+    <li><strong>Combined stress studies:</strong> Long-term experiments examining the combined effects of radiation and microgravity on DNA repair and aging.</li>
+    <li><strong>Pharmaceutical countermeasures:</strong> Development of drugs that enhance DNA repair or scavenge free radicals.</li>
+    <li><strong>In-situ resource utilisation:</strong> Using water, regolith, or locally produced polymers on the Moon or Mars for sustainable shielding.</li>
+    <li><strong>Radiation-smart habitats:</strong> Adaptive shielding systems that respond to solar activity in real time.</li>
   </ul>
 </section>
 
@@ -444,16 +462,24 @@
   <h2>❓ Commonly Asked Questions</h2>
   <div class="grid">
     <div class="card">
-      <h3>Why not use lead?</h3>
-      <p>Lead is very heavy and produces harmful secondary radiation in space.</p>
+      <h3>Why is space radiation more dangerous than radiation on Earth?</h3>
+      <p>Earth’s atmosphere and magnetic field absorb most harmful particles. In space, astronauts are exposed directly to high-energy ionising radiation.</p>
     </div>
     <div class="card">
-      <h3>Why is hydrogen so effective?</h3>
-      <p>Hydrogen has similar mass to neutrons, maximizing energy loss per collision.</p>
+      <h3>Why not use lead for shielding?</h3>
+      <p>Although lead blocks radiation effectively, its high density makes it inefficient for spaceflight and increases secondary particle production.</p>
     </div>
     <div class="card">
-      <h3>Is aluminium useless?</h3>
-      <p>No — it is essential structurally but should be combined with hydrogen-rich layers.</p>
+      <h3>Why are hydrogen-rich materials preferred?</h3>
+      <p>Hydrogen atoms efficiently slow protons and neutrons while producing fewer secondary particles, reducing biological damage.</p>
+    </div>
+    <div class="card">
+      <h3>Can astronauts be fully protected from radiation?</h3>
+      <p>No. Current technology can reduce but not eliminate exposure, making mission duration and shielding design critical.</p>
+    </div>
+    <div class="card">
+      <h3>Does radiation damage spacesuits?</h3>
+      <p>Radiation can degrade polymers over time, limiting suit lifespan, but suits are not designed to provide full radiation shielding.</p>
     </div>
   </div>
 </section>
