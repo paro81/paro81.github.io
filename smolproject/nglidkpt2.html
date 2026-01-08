@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Space Radiation Shieldin</title>
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --card: #12182b;
+      --accent: #4fd1c5;
+      --accent-2: #63b3ed;
+      --warning: #f6ad55;
+      --danger: #fc8181;
+      --text: #e6e9f0;
+      --muted: #a0aec0;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(circle at top, #111633, var(--bg));
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      max-width: 800px;
+      margin: 0 auto;
+      color: var(--muted);
+    }
+
+    section {
+      max-width: 1100px;
+      margin: 0 auto 4rem;
+      padding: 0 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: linear-gradient(180deg, #151b34, var(--card));
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 45px rgba(0,0,0,0.5);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .best { background: rgba(79,209,197,0.15); color: var(--accent); }
+    .good { background: rgba(99,179,237,0.15); color: var(--accent-2); }
+    .warn { background: rgba(246,173,85,0.15); color: var(--warning); }
+    .danger { background: rgba(252,129,129,0.15); color: var(--danger); }
+
+    ul {
+      padding-left: 1.1rem;
+      margin: 0.5rem 0 0;
+    }
+
+    li { margin-bottom: 0.35rem; }
+
+    .source {
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .layered {
+      background: linear-gradient(135deg, #1a2040, #0f1430);
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem 3rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Space Radiation Shielding — Interdisciplinary Research</h1>
+  <p>
+    Investigating how material chemistry, biology, and physics reduce cellular damage from radiation during long-duration space missions.
+  </p>
+</header>
+
+<section>
+  <h2>🌌 Introduction & Background</h2>
+  <p>
+    <strong>Chosen Theme:</strong> Radiation shielding materials for human space exploration.
+  </p>
+  <p>
+    <strong>Research Question:</strong> How does increased radiation exposure affect cellular damage in humans during long-duration space missions, and how can material choice mitigate this risk?
+  </p>
+  <p>
+    <strong>Real-World Relevance:</strong> Astronauts traveling beyond Earth’s magnetosphere (e.g., Moon, Mars missions) are exposed to Galactic Cosmic Rays and Solar Particle Events. Effective shielding is essential to reduce cancer risk, DNA damage, and long-term health impacts.
+  </p>
+</section>
+
+<section>
+  <h2>🧬 Interdisciplinary Approach</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Biology</h3>
+      <ul>
+        <li>Radiation causes DNA strand breaks and oxidative stress.</li>
+        <li>High-LET radiation produces complex, hard-to-repair damage.</li>
+        <li>Reduced dose lowers mutation rates and cancer risk.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Chemistry</h3>
+      <ul>
+        <li>Atomic number and hydrogen content govern radiation interaction.</li>
+        <li>Hydrogen-rich materials moderate neutrons effectively.</li>
+        <li>Low-Z materials minimize secondary radiation production.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Environmental Science</h3>
+      <ul>
+        <li>Space environment lacks atmospheric and magnetic shielding.</li>
+        <li>Mission duration increases cumulative radiation dose.</li>
+        <li>Material mass impacts launch cost and sustainability.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>🧪 Methodology</h2>
+  <p>
+    This investigation uses a <strong>secondary research design</strong> supported by computational simulation data from peer-reviewed journals, NASA, ESA, and materials science databases.
+  </p>
+  <ul>
+    <li>Compare materials by atomic structure, density, and hydrogen content.</li>
+    <li>Analyse radiation dose reduction per unit mass.</li>
+    <li>Evaluate biological relevance using dose equivalent (Sv).</li>
+  </ul>
+  <p>
+    Planning involved selecting materials commonly proposed for spacecraft shielding and analysing their effectiveness against GCR and SPE radiation.
+  </p>
+</section>
+
+<section>
+  <h2>📊 Results & Data Analysis</h2>
+  <p>
+    Simulation and experimental studies consistently show hydrogen-rich materials outperform aluminium on a mass-for-mass basis.
+  </p>
+  <div class="grid">
+    <div class="card">
+      <h3>Key Findings Summary</h3>
+      <ul>
+        <li>Polyethylene reduces dose equivalent more effectively than aluminium.</li>
+        <li>Metal hydrides provide the highest hydrogen density and dose attenuation.</li>
+        <li>High-Z metals increase secondary radiation despite high density.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Suggested Visual Data</h3>
+      <ul>
+        <li>Bar chart: Dose reduction vs material type.</li>
+        <li>Line graph: Dose accumulation over mission duration.</li>
+        <li>Diagram: Layered shielding interaction with particles.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>🥇 Material Performance Overview</h2>
+  <div class="grid">
+
+<section>
+  <h2>📉 Good Practical Options — Moderate Effectiveness</h2>
+  <div class="grid">
+
+    <div class="card fade-in">
+      <span class="badge good">Multi‑Purpose</span>
+      <h3>Water / Hydrogels</h3>
+      <ul>
+        <li>High hydrogen content provides neutron moderation.</li>
+        <li>Can be positioned around crew quarters as passive shielding.</li>
+        <li>Functions as both radiation protection and life-support mass.</li>
+      </ul>
+      <div class="source">Source: ESA</div>
+    </div>
+
+    <div class="card fade-in">
+      <span class="badge good">Structural + Shielding</span>
+      <h3>Carbon-Based Composites</h3>
+      <ul>
+        <li>Includes Kevlar and carbon-fiber-reinforced plastics.</li>
+        <li>Radiation attenuation close to polyethylene.</li>
+        <li>High mechanical strength makes them suitable for load-bearing roles.</li>
+      </ul>
+      <div class="source">Source: PubMed</div>
+    </div>
+
+    <div class="card fade-in">
+      <span class="badge good">Emerging Tech</span>
+      <h3>Boron Nitride Nanotubes (BNNTs)</h3>
+      <ul>
+        <li>Combines hydrogenation and boron neutron absorption.</li>
+        <li>Exceptional strength-to-weight ratio.</li>
+        <li>Still experimental and cost-intensive.</li>
+      </ul>
+      <div class="source">Source: MDPI</div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>⚠️ Heavier Materials — Effective but Mass‑Costly</h2>
+  <div class="grid">
+
+    <div class="card fade-in">
+      <span class="badge warn">Structural Standard</span>
+      <h3>Aluminium</h3>
+      <ul>
+        <li>Primary spacecraft structural material.</li>
+        <li>Provides ~50% reduction of solar particle radiation at usable thickness.</li>
+        <li>Produces secondary neutrons under GCR exposure.</li>
+        <li>Less effective biologically than hydrogen-rich materials.</li>
+      </ul>
+      <div class="source">Source: NASA</div>
+    </div>
+
+    <div class="card fade-in">
+      <span class="badge danger">High‑Z Metals</span>
+      <h3>Tungsten, Lead & Bismuth Composites</h3>
+      <ul>
+        <li>Excellent gamma and X‑ray shielding on Earth.</li>
+        <li>High atomic number increases secondary particle generation in space.</li>
+        <li>Excessive mass limits spacecraft application.</li>
+      </ul>
+      <div class="source">Source: The Tech Vortex</div>
+    </div>
+
+  </div>
+</section>
+
+<section class="layered">
+  <h2>🧱 Composite & Layered Shielding — Optimal Strategy</h2>
+  <p>
+    Research consistently shows that layered shielding systems outperform single-material designs at the same mass.
+  </p>
+  <ul>
+    <li><strong>Low‑Z / Hydrogen‑rich layers</strong> (PE, water) slow protons and neutrons.</li>
+    <li><strong>Structural composite layers</strong> provide mechanical integrity.</li>
+    <li>Same-mass layered systems reduce dose equivalent more effectively than aluminium alone.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>✅ Results, Conclusion & Evaluation</h2>
+  <ul>
+    <li>Increased radiation exposure directly increases cellular DNA damage.</li>
+    <li>Hydrogen-rich materials significantly reduce biologically harmful radiation.</li>
+    <li>Aluminium alone is insufficient due to secondary particle production.</li>
+  </ul>
+  <p>
+    <strong>Conclusion:</strong> A layered shielding approach using hydrogen-rich materials provides the best protection for astronauts while minimizing mass.
+  </p>
+</section>
+
+<section>
+  <h2>🔮 Future Research</h2>
+  <ul>
+    <li>Development of advanced hydrogenated nanomaterials (e.g., BNNTs).</li>
+    <li>Long-term biological studies under combined radiation and microgravity.</li>
+    <li>In-situ resource utilization for shielding materials on Mars.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>❓ Commonly Asked Questions</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Why not use lead?</h3>
+      <p>Lead is very heavy and produces harmful secondary radiation in space.</p>
+    </div>
+    <div class="card">
+      <h3>Why is hydrogen so effective?</h3>
+      <p>Hydrogen has similar mass to neutrons, maximizing energy loss per collision.</p>
+    </div>
+    <div class="card">
+      <h3>Is aluminium useless?</h3>
+      <p>No — it is essential structurally but should be combined with hydrogen-rich layers.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Interdisciplinary Chemistry Research • Space Radiation Shielding
+</footer>
+
+</body>
+</html>
