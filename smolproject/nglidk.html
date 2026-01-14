@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Radiation Shielding</title>
+    <title>radiation shielding</title>
     <style>
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #0b0f19; color: #eee; display: flex; flex-direction: column; align-items: center; padding: 20px; }
         .main-layout { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
@@ -27,44 +27,44 @@
 </head>
 <body>
 
-    <h1>Radiation Shielding Exemplars</h1>
+    <h1>radiation shielding exemplars</h1>
 
     <div class="controls">
-        <label>Active Shield: </label>
+        <label>active shield: </label>
         <select id="materialSelect" onchange="resetStats()">
-            <option value="none">No Shield (Vacuum)</option>
-            <option value="plastic">Polyethylene (Plastic)</option>
-            <option value="aluminum">Aluminum Shell</option>
-            <option value="regolith">Lunar Regolith</option>
-            <option value="lead">Lead Plate</option>
+            <option value="none">no shield (vacuum)</option>
+            <option value="plastic">polyethylene (plastic)</option>
+            <option value="aluminum">aluminum shell</option>
+            <option value="regolith">lunar regolith</option>
+            <option value="lead">lead plate</option>
         </select>
-        <button onclick="resetStats()">Reset</button>
+        <button onclick="resetStats()">reset</button>
     </div>
 
     <div class="main-layout">
         <canvas id="simCanvas" width="500" height="500"></canvas>
 
         <div class="panel">
-            <h3 style="margin-top:0">Absorption Data</h3>
-            <p style="font-size: 0.8rem; color: #94a3b8;">Particles captured by the shield material</p>
+            <h3 style="margin-top:0">absorption data</h3>
+            <p style="font-size: 0.8rem; color: #94a3b8;">particles captured by the shield material</p>
             <div class="stats-grid">
-                <div class="stat-card">Alpha<span id="abs-alpha" class="stat-val alpha-text">0</span></div>
-                <div class="stat-card">Beta<span id="abs-beta" class="stat-val beta-text">0</span></div>
-                <div class="stat-card">Gamma<span id="abs-gamma" class="stat-val gamma-text">0</span></div>
+                <div class="stat-card">alpha<span id="abs-alpha" class="stat-val alpha-text">0</span></div>
+                <div class="stat-card">beta<span id="abs-beta" class="stat-val beta-text">0</span></div>
+                <div class="stat-card">gamma<span id="abs-gamma" class="stat-val gamma-text">0</span></div>
             </div>
 
             <hr style="border: 0; border-top: 1px solid #334155; margin: 20px 0;">
 
-            <h3>Passing Data (Dose)</h3>
-            <p style="font-size: 0.8rem; color: #94a3b8;">Particles that penetrated the interior</p>
+            <h3>passing data (dose)</h3>
+            <p style="font-size: 0.8rem; color: #94a3b8;">particles that penetrated the interior</p>
             <div class="stats-grid">
-                <div class="stat-card">Alpha<span id="pass-alpha" class="stat-val alpha-text">0</span></div>
-                <div class="stat-card">Beta<span id="pass-beta" class="stat-val beta-text">0</span></div>
-                <div class="stat-card">Gamma<span id="pass-gamma" class="stat-val gamma-text">0</span></div>
+                <div class="stat-card">alpha<span id="pass-alpha" class="stat-val alpha-text">0</span></div>
+                <div class="stat-card">beta<span id="pass-beta" class="stat-val beta-text">0</span></div>
+                <div class="stat-card">gamma<span id="pass-gamma" class="stat-val gamma-text">0</span></div>
             </div>
             
             <div style="margin-top:20px; background: #0f172a; padding: 15px; border-radius: 8px;">
-                <strong>Efficiency:</strong> <span id="efficiency">0%</span>
+                <strong>efficiency:</strong> <span id="efficiency">0%</span>
             </div>
         </div>
     </div>
