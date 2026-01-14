@@ -22,7 +22,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 "bigger than the instagram, bigger than the twitch",
                 "fake it till you make it",
                 "rip good ol' laptop june2017-july2025",
-                "why use a normal linktree type website"
+                "why use a normal linktree type website",
+                "spam spam spam all i do is spam"
             ];
         
             var randomIndex = Math.floor(Math.random() * messages.length);
