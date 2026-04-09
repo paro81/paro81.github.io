@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>2048 Game</title>
+  <title>squares</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -11,7 +11,7 @@
     }
     h1 { color: #776e65; }
     #game {
-      width: 320px;
+      width: 340px;
       margin: 20px auto;
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -19,10 +19,11 @@
       background: #bbada0;
       padding: 10px;
       border-radius: 10px;
+      position: relative;
     }
     .tile {
-      width: 70px;
-      height: 70px;
+      width: 75px;
+      height: 75px;
       background: #cdc1b4;
       display: flex;
       align-items: center;
@@ -30,15 +31,33 @@
       font-size: 20px;
       font-weight: bold;
       border-radius: 5px;
+      transition: all 0.15s ease-in-out;
+    }
+    #overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(238, 228, 218, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      color: #776e65;
+      border-radius: 10px;
+      display: none;
     }
   </style>
 </head>
 <body>
   <h1>2048</h1>
   <div id="game"></div>
+  <div id="overlay">Game Over</div>
 
   <script>
     const game = document.getElementById("game");
+    const overlay = document.getElementById("overlay");
     let grid = Array(16).fill(0);
 
     function draw() {
@@ -72,11 +91,14 @@
     }
 
     function moveLeft() {
+      let moved = false;
       for (let i = 0; i < 4; i++) {
         let row = grid.slice(i * 4, i * 4 + 4);
-        row = slide(row);
-        for (let j = 0; j < 4; j++) grid[i * 4 + j] = row[j];
+        let newRow = slide(row);
+        if (row.toString() !== newRow.toString()) moved = true;
+        for (let j = 0; j < 4; j++) grid[i * 4 + j] = newRow[j];
       }
+      return moved;
     }
 
     function rotate() {
@@ -89,7 +111,26 @@
       grid = newGrid;
     }
 
+    function canMove() {
+      for (let i = 0; i < 16; i++) {
+        if (grid[i] === 0) return true;
+      }
+      for (let r = 0; r < 4; r++) {
+        for (let c = 0; c < 3; c++) {
+          if (grid[r * 4 + c] === grid[r * 4 + c + 1]) return true;
+        }
+      }
+      for (let c = 0; c < 4; c++) {
+        for (let r = 0; r < 3; r++) {
+          if (grid[r * 4 + c] === grid[(r + 1) * 4 + c]) return true;
+        }
+      }
+      return false;
+    }
+
     function move(direction) {
+      if (overlay.style.display === "flex") return;
+
       let rotations = {
         ArrowUp: 1,
         ArrowRight: 2,
@@ -98,11 +139,16 @@
       }[direction];
 
       for (let i = 0; i < rotations; i++) rotate();
-      moveLeft();
+      let moved = moveLeft();
       for (let i = 0; i < (4 - rotations) % 4; i++) rotate();
 
-      addTile();
-      draw();
+      if (moved) {
+        addTile();
+        draw();
+        if (!canMove()) {
+          overlay.style.display = "flex";
+        }
+      }
     }
 
     document.addEventListener("keydown", e => {
