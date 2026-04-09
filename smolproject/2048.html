@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>squares</title>
+  <title>3^n Game</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -51,7 +51,7 @@
   </style>
 </head>
 <body>
-  <h1>2048</h1>
+  <h1>Power of 3 (3ⁿ)</h1>
   <div id="game"></div>
   <div id="overlay">Game Over</div>
 
@@ -74,14 +74,14 @@
       let empty = grid.map((v, i) => v === 0 ? i : null).filter(v => v !== null);
       if (empty.length === 0) return;
       let index = empty[Math.floor(Math.random() * empty.length)];
-      grid[index] = Math.random() < 0.9 ? 2 : 4;
+      grid[index] = Math.random() < 0.9 ? 3 : 9;
     }
 
     function slide(row) {
       row = row.filter(v => v);
       for (let i = 0; i < row.length - 1; i++) {
         if (row[i] === row[i + 1]) {
-          row[i] *= 2;
+          row[i] *= 3;
           row[i + 1] = 0;
         }
       }
