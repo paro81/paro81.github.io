@@ -23,7 +23,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 "fake it till you make it",
                 "rip good ol' laptop june2017-july2025",
                 "why use linktree",
-                "thats enough mr west please no more today"
+                "thats enough mr west please no more today",
+                "i've completely lost all meaning"
             ];
         
             var randomIndex = Math.floor(Math.random() * messages.length);
