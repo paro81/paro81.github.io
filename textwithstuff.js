@@ -17,7 +17,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 "redemption arc in the works",
                 "i'm sorry that you're reading this",
                 "when you put in the work and then things get worse:",
-                "peggy the goat",
                 "to cook or not to cook, there is no question. melt the frying pan",
                 "bigger than the instagram, bigger than the twitch",
                 "fake it till you make it",
