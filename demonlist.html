@@ -111,6 +111,44 @@
       padding: 20px 30px;
       border-top: 1px solid #e0e0e0;
     }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 16px;
+      }
+
+      .top10-list {
+        width: 100%;
+        gap: 28px;
+      }
+
+      .box-main {
+        flex-direction: column;
+        padding: 16px;
+        gap: 12px;
+      }
+
+      .thumbnail-content img {
+        width: 160px;
+        height: 90px;
+      }
+
+      .rank-title {
+        font-size: 20px;
+      }
+
+      .rank-number {
+        font-size: 20px;
+      }
+
+      .dropdown {
+        padding: 0 16px;
+      }
+
+      li.open .dropdown {
+        padding: 14px 16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -278,7 +316,7 @@
     </li>
 
   </ul>
-  
+
   <script>
     document.querySelectorAll('.box-main').forEach(function(main) {
       main.addEventListener('click', function() {
