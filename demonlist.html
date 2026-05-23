@@ -15,11 +15,11 @@
 
     h1 {
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       color: #333;
     }
 
-    h2 {
+    h3 {
       text-align: center;
     }
 
@@ -31,6 +31,7 @@
       display: flex;
       flex-direction: column;
       gap: 50px;
+      counter-reset: rank;
     }
 
     .top10-list li {
@@ -63,6 +64,11 @@
       font-size: 24px;
       font-weight: bold;
       color: #4f46e5;
+      counter-increment: rank;
+    }
+
+    .rank-number::before {
+      content: "#" counter(rank);
     }
 
     .rank-title {
@@ -111,13 +117,13 @@
 <body>
 
   <h1>Top 10 jackpot</h1>
-  <h2>They are quite intriguing</h2>
+  <h3>Ranked based ONLY on my opinion, sometimes I will consider moving things around, but I also do factor device/hz constraints if applicable. Click on the image to watch the completion video and the boxes to see additional information.</h3>
   <ul class="top10-list">
 
     <li>
       <div class="box-main">
         <div class="text-content">
-          <div class="rank-number">#1</div>
+          <div class="rank-number"></div>
           <div class="rank-title">jackpot</div>
           <div class="rank-description">jackpot.</div>
         </div>
@@ -131,7 +137,7 @@
     <li>
       <div class="box-main">
         <div class="text-content">
-          <div class="rank-number">#2</div>
+          <div class="rank-number"></div>
           <div class="rank-title">jackpot</div>
           <div class="rank-description">jackpot.</div>
         </div>
@@ -145,7 +151,7 @@
     <li>
       <div class="box-main">
         <div class="text-content">
-          <div class="rank-number">#3</div>
+          <div class="rank-number"></div>
           <div class="rank-title">jackpot</div>
           <div class="rank-description">jackpot.</div>
         </div>
@@ -159,7 +165,7 @@
     <li>
       <div class="box-main">
         <div class="text-content">
-          <div class="rank-number">#4</div>
+          <div class="rank-number"></div>
           <div class="rank-title">jackpot</div>
           <div class="rank-description">jackpot.</div>
         </div>
@@ -173,7 +179,7 @@
     <li>
       <div class="box-main">
         <div class="text-content">
-          <div class="rank-number">#5</div>
+          <div class="rank-number"></div>
           <div class="rank-title">jackpot</div>
           <div class="rank-description">jackpot.</div>
         </div>
@@ -187,7 +193,7 @@
     <li>
       <div class="box-main">
         <div class="text-content">
-          <div class="rank-number">#6</div>
+          <div class="rank-number"></div>
           <div class="rank-title">jackpot</div>
           <div class="rank-description">jackpot.</div>
         </div>
@@ -201,7 +207,7 @@
     <li>
       <div class="box-main">
         <div class="text-content">
-          <div class="rank-number">#7</div>
+          <div class="rank-number"></div>
           <div class="rank-title">jackpot</div>
           <div class="rank-description">jackpot.</div>
         </div>
@@ -215,7 +221,7 @@
     <li>
       <div class="box-main">
         <div class="text-content">
-          <div class="rank-number">#8</div>
+          <div class="rank-number"></div>
           <div class="rank-title">jackpot</div>
           <div class="rank-description">jackpot.</div>
         </div>
@@ -229,7 +235,7 @@
     <li>
       <div class="box-main">
         <div class="text-content">
-          <div class="rank-number">#9</div>
+          <div class="rank-number"></div>
           <div class="rank-title">jackpot</div>
           <div class="rank-description">jackpot.</div>
         </div>
@@ -243,7 +249,7 @@
     <li>
       <div class="box-main">
         <div class="text-content">
-          <div class="rank-number">#10</div>
+          <div class="rank-number"></div>
           <div class="rank-title">jackpot</div>
           <div class="rank-description">jackpot.</div>
         </div>
@@ -256,6 +262,24 @@
 
   </ul>
 
+  <h1>Legacy</h1>
+  <h3>The placements won't be updated in this section, you can refer to <a href="https://docs.google.com/spreadsheets/d/1r2fCobUjmPva9yHVj4yEpq1GkAZfugfhrPSEBOVbt20/edit?gid=1042565648#gid=1042565648">my spreadsheet</a> for the entire (soon to be) top 100-150 demonlist as well as additional info not mentioned here.</h3>
+  <ul class="top10-list">
+  <li>
+    <div class="box-main">
+      <div class="text-content">
+        <div class="rank-title">Your Title</div>
+        <div class="rank-description">Your description.</div>
+      </div>
+      <a class="thumbnail-content" href="YOUR_LINK" target="_blank" onclick="event.stopPropagation()">
+        <img src="YOUR_THUMBNAIL_URL" alt="Video Thumbnail">
+      </a>
+    </div>
+    <div class="dropdown">Your extra details here.</div>
+  </li>
+
+  </ul>
+  
   <script>
     document.querySelectorAll('.box-main').forEach(function(main) {
       main.addEventListener('click', function() {
@@ -263,6 +287,20 @@
       });
     });
   </script>
-
+  <!--
+  <li>
+    <div class="box-main">
+      <div class="text-content">
+        <div class="rank-number"></div>
+        <div class="rank-title">Your Title</div>
+        <div class="rank-description">Your description.</div>
+      </div>
+      <a class="thumbnail-content" href="YOUR_LINK" target="_blank" onclick="event.stopPropagation()">
+        <img src="YOUR_THUMBNAIL_URL" alt="Video Thumbnail">
+      </a>
+    </div>
+    <div class="dropdown">Your extra details here.</div>
+  </li>
+  -->
 </body>
 </html>
