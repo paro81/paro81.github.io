@@ -19,45 +19,44 @@
       color: #333;
     }
 
-    .top10-container {
-      width: 100%;
-      margin: auto;
+    h2 {
+      text-align: center;
+    }
+
+    .top10-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 auto;
+      width: 66.67%;
       display: flex;
       flex-direction: column;
       gap: 50px;
     }
 
-    .rank-box {
-      width: 100%;
-      box-sizing: border-box;
+    .top10-list li {
       background: white;
       border-left: 8px solid #4f46e5;
-      padding: 20px;
       border-radius: 12px;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
       transition: transform 0.2s;
+    }
 
+    .top10-list li:hover {
+      transform: scale(1.02);
+    }
+
+    .box-main {
       display: flex;
-      justify-content: space-between;
       gap: 20px;
+      padding: 30px;
+      cursor: pointer;
+      user-select: none;
     }
 
     .text-content {
       flex: 1;
-    }
-    
-    .thumbnail-content {
-      flex: 1;
-    }
-    
-    .thumbnail-content img {
-      width: 250px;
-      border-radius: 10px;
-      display: block;
-    }
-
-    .rank-box:hover {
-      transform: scale(1.02);
+      text-align: left;
     }
 
     .rank-number {
@@ -67,127 +66,176 @@
     }
 
     .rank-title {
-      font-size: 20px;
+      font-size: 24px;
       margin-top: 5px;
       color: #222;
     }
 
     .rank-description {
-      margin-top: 10px;
+      margin-top: 12px;
       color: #555;
       line-height: 1.5;
     }
 
-    .top10-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    .thumbnail-content {
+      flex-shrink: 0;
+    }
+
+    .thumbnail-content img {
+      width: 250px;
+      height: 140px;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .dropdown {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      padding: 0 30px;
+      border-top: 0px solid #e0e0e0;
+      color: #444;
+      line-height: 1.7;
+      font-size: 0.95rem;
+    }
+
+    li.open .dropdown {
+      max-height: 300px;
+      padding: 20px 30px;
+      border-top: 1px solid #e0e0e0;
     }
   </style>
 </head>
 <body>
 
-  <h1>Top 10 deez</h1>
+  <h1>Top 10 jackpot</h1>
+  <h2>They are quite intriguing</h2>
+  <ul class="top10-list">
 
-  <div class="top10-container">
-
-    <div class="rank-box">
-      <div class="rank-number">#1</div>
-      <div class="rank-title">jackpot</div>
-      <div class="rank-description">
-        jackpot.
+    <li>
+      <div class="box-main">
+        <div class="text-content">
+          <div class="rank-number">#1</div>
+          <div class="rank-title">jackpot</div>
+          <div class="rank-description">jackpot.</div>
+        </div>
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=DxL2HoqLbyA" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/DxL2HoqLbyA/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
       </div>
+      <div class="dropdown">Additional details about this entry go here. You can add any extra text, links, or information.</div>
+    </li>
 
-      <a class="thumbnail-content"
-     href="https://www.youtube.com/watch?v=DxL2HoqLbyA" target="_blank">
-      <img
-        src="https://img.youtube.com/vi/DxL2HoqLbyA/hqdefault.jpg"
-        alt="Video Thumbnail">
-      </a>
-    </div>
-
-    
-    <div class="rank-box">
-      <div class="rank-number">#1</div>
-      <div class="rank-title">jackpot</div>
-      <div class="rank-description">
-        jackpot.
+    <li>
+      <div class="box-main">
+        <div class="text-content">
+          <div class="rank-number">#2</div>
+          <div class="rank-title">jackpot</div>
+          <div class="rank-description">jackpot.</div>
+        </div>
       </div>
-    </div>
+      <div class="dropdown">Additional details about this entry go here. You can add any extra text, links, or information.</div>
+    </li>
 
-    
-    <div class="rank-box">
-      <div class="rank-number">#1</div>
-      <div class="rank-title">jackpot</div>
-      <div class="rank-description">
-        jackpot.
+    <li>
+      <div class="box-main">
+        <div class="text-content">
+          <div class="rank-number">#3</div>
+          <div class="rank-title">jackpot</div>
+          <div class="rank-description">jackpot.</div>
+        </div>
       </div>
-    </div>
+      <div class="dropdown">Additional details about this entry go here. You can add any extra text, links, or information.</div>
+    </li>
 
-    
-    <div class="rank-box">
-      <div class="rank-number">#1</div>
-      <div class="rank-title">jackpot</div>
-      <div class="rank-description">
-        jackpot.
+    <li>
+      <div class="box-main">
+        <div class="text-content">
+          <div class="rank-number">#4</div>
+          <div class="rank-title">jackpot</div>
+          <div class="rank-description">jackpot.</div>
+        </div>
       </div>
-    </div>
+      <div class="dropdown">Additional details about this entry go here. You can add any extra text, links, or information.</div>
+    </li>
 
-    
-    <div class="rank-box">
-      <div class="rank-number">#1</div>
-      <div class="rank-title">jackpot</div>
-      <div class="rank-description">
-        jackpot.
+    <li>
+      <div class="box-main">
+        <div class="text-content">
+          <div class="rank-number">#5</div>
+          <div class="rank-title">jackpot</div>
+          <div class="rank-description">jackpot.</div>
+        </div>
       </div>
-    </div>
+      <div class="dropdown">Additional details about this entry go here. You can add any extra text, links, or information.</div>
+    </li>
 
-    
-   <div class="rank-box">
-      <div class="rank-number">#1</div>
-      <div class="rank-title">jackpot</div>
-      <div class="rank-description">
-        jackpot.
+    <li>
+      <div class="box-main">
+        <div class="text-content">
+          <div class="rank-number">#6</div>
+          <div class="rank-title">jackpot</div>
+          <div class="rank-description">jackpot.</div>
+        </div>
       </div>
-    </div>
+      <div class="dropdown">Additional details about this entry go here. You can add any extra text, links, or information.</div>
+    </li>
 
-    
-    <div class="rank-box">
-      <div class="rank-number">#1</div>
-      <div class="rank-title">jackpot</div>
-      <div class="rank-description">
-        jackpot.
+    <li>
+      <div class="box-main">
+        <div class="text-content">
+          <div class="rank-number">#7</div>
+          <div class="rank-title">jackpot</div>
+          <div class="rank-description">jackpot.</div>
+        </div>
       </div>
-    </div>
+      <div class="dropdown">Additional details about this entry go here. You can add any extra text, links, or information.</div>
+    </li>
 
-    
-    <div class="rank-box">
-      <div class="rank-number">#1</div>
-      <div class="rank-title">jackpot</div>
-      <div class="rank-description">
-        jackpot.
+    <li>
+      <div class="box-main">
+        <div class="text-content">
+          <div class="rank-number">#8</div>
+          <div class="rank-title">jackpot</div>
+          <div class="rank-description">jackpot.</div>
+        </div>
       </div>
-    </div>
+      <div class="dropdown">Additional details about this entry go here. You can add any extra text, links, or information.</div>
+    </li>
 
-    
-    <div class="rank-box">
-      <div class="rank-number">#1</div>
-      <div class="rank-title">jackpot</div>
-      <div class="rank-description">
-        jackpot.
+    <li>
+      <div class="box-main">
+        <div class="text-content">
+          <div class="rank-number">#9</div>
+          <div class="rank-title">jackpot</div>
+          <div class="rank-description">jackpot.</div>
+        </div>
       </div>
-    </div>
+      <div class="dropdown">Additional details about this entry go here. You can add any extra text, links, or information.</div>
+    </li>
 
-    
-    <div class="rank-box">
-      <div class="rank-number">#1</div>
-      <div class="rank-title">jackpot</div>
-      <div class="rank-description">
-        jackpot.
+    <li>
+      <div class="box-main">
+        <div class="text-content">
+          <div class="rank-number">#10</div>
+          <div class="rank-title">jackpot</div>
+          <div class="rank-description">jackpot.</div>
+        </div>
       </div>
-    </div>
+      <div class="dropdown">Additional details about this entry go here. You can add any extra text, links, or information.</div>
+    </li>
 
-  </div>
+  </ul>
+
+  <script>
+    document.querySelectorAll('.box-main').forEach(function(main) {
+      main.addEventListener('click', function() {
+        main.closest('li').classList.toggle('open');
+      });
+    });
+  </script>
 
 </body>
 </html>
