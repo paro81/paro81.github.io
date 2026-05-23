@@ -39,7 +39,6 @@
 
       display: flex;
       justify-content: space-between;
-      align-items: center;
       gap: 20px;
     }
 
@@ -47,15 +46,15 @@
       flex: 1;
     }
     
-    .video-content {
+    .thumbnail-content {
       flex: 1;
     }
     
-    .video-content iframe {
+    .thumbnail-content img {
       width: 50%;
-      height: 250px;
-      border: none;
+      max-width: 350px;
       border-radius: 10px;
+      display: block;
     }
 
     .rank-box:hover {
@@ -94,15 +93,18 @@
         jackpot.
       </div>
 
-      <div class="video-content">
-        <iframe
-          src="https://www.youtube.com/embed/6c4z3RLMy20"
-          title="YouTube video"
-          allowfullscreen>
-        </iframe>
-      </div>
+      <a class="thumbnail-content"
+     href="https://www.youtube.com/watch?v=6c4z3RLMy20"
+     target="_blank">
+
+      <img
+        src="https://img.youtube.com/vi/6c4z3RLMy20/maxresdefault.jpg"
+        alt="Video Thumbnail">
+    
+      </a>
     </div>
 
+    
     <div class="rank-box">
       <div class="rank-number">#1</div>
       <div class="rank-title">jackpot</div>
@@ -111,6 +113,7 @@
       </div>
     </div>
 
+    
     <div class="rank-box">
       <div class="rank-number">#1</div>
       <div class="rank-title">jackpot</div>
@@ -119,6 +122,7 @@
       </div>
     </div>
 
+    
     <div class="rank-box">
       <div class="rank-number">#1</div>
       <div class="rank-title">jackpot</div>
@@ -127,6 +131,7 @@
       </div>
     </div>
 
+    
     <div class="rank-box">
       <div class="rank-number">#1</div>
       <div class="rank-title">jackpot</div>
@@ -135,6 +140,7 @@
       </div>
     </div>
 
+    
    <div class="rank-box">
       <div class="rank-number">#1</div>
       <div class="rank-title">jackpot</div>
@@ -143,21 +149,6 @@
       </div>
     </div>
 
-    <div class="rank-box">
-      <div class="rank-number">#1</div>
-      <div class="rank-title">jackpot</div>
-      <div class="rank-description">
-        jackpot.
-      </div>
-    </div>
-    
-    <div class="rank-box">
-      <div class="rank-number">#1</div>
-      <div class="rank-title">jackpot</div>
-      <div class="rank-description">
-        jackpot.
-      </div>
-    </div>
     
     <div class="rank-box">
       <div class="rank-number">#1</div>
@@ -167,6 +158,25 @@
       </div>
     </div>
 
+    
+    <div class="rank-box">
+      <div class="rank-number">#1</div>
+      <div class="rank-title">jackpot</div>
+      <div class="rank-description">
+        jackpot.
+      </div>
+    </div>
+
+    
+    <div class="rank-box">
+      <div class="rank-number">#1</div>
+      <div class="rank-title">jackpot</div>
+      <div class="rank-description">
+        jackpot.
+      </div>
+    </div>
+
+    
     <div class="rank-box">
       <div class="rank-number">#1</div>
       <div class="rank-title">jackpot</div>
