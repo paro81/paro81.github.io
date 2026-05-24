@@ -1,0 +1,13 @@
+<li data-added="yyyy-mm-dd">
+    <div class="box-main">
+      <a class="thumbnail-content" href="VIDEO_LINK" target="_blank" onclick="event.stopPropagation()">
+        <img src="https://img.youtube.com/vi/THUMBNAIL_URL/hqdefault.jpg" alt="Video Thumbnail">
+      </a>
+      <div class="text-content">
+        <div class="rank-number"></div>
+        <div class="rank-title">Name</div>
+        <div class="rank-description">Creator</div>
+      </div>
+    </div>
+    <div class="dropdown">Extra details here.</div>
+  </li>
