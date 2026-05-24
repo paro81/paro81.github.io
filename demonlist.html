@@ -328,12 +328,72 @@
 
   </ul>
 
+  <button id="scrollTopBtn" onclick="scrollToTop()" title="what do u think this means">⬆</button>
+
+  <style>
+    #scrollTopBtn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 48px;
+      height: 48px;
+      background: #3c3c3c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 24px;
+      cursor: pointer;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    #scrollTopBtn.visible {
+      opacity: 0.75;
+      pointer-events: auto;
+    }
+    #scrollTopBtn:hover {
+      background: #303030;
+      opacity: 1;
+    }
+  </style>
+
   <script>
     document.querySelectorAll('.box-main').forEach(function(main) {
       main.addEventListener('click', function() {
         main.closest('li').classList.toggle('open');
       });
     });
+
+    const btn = document.getElementById('scrollTopBtn');
+
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 200) {
+        btn.classList.add('visible');
+      } else {
+        btn.classList.remove('visible');
+      }
+    });
+
+    function scrollToTop() {
+      const start = window.scrollY;
+      const duration = 600;
+      let startTime = null;
+
+      function easeInOutSine(t) {
+        return -(Math.cos(Math.PI * t) - 1) / 2;
+      }
+
+      function step(timestamp) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        window.scrollTo(0, start * (1 - easeInOutSine(progress)));
+        if (progress < 1) requestAnimationFrame(step);
+      }
+
+      requestAnimationFrame(step);
+    }
   </script>
   <!--
   <li>
