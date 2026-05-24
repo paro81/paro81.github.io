@@ -114,6 +114,15 @@
       border-top: 1px solid #000;
     }
 
+    #main-list li:nth-child(1) { border-left-color: #FFD700; }
+    #main-list li:nth-child(1) .rank-number { color: #FFD700; }
+
+    #main-list li:nth-child(2) { border-left-color: #C0C0C0; }
+    #main-list li:nth-child(2) .rank-number { color: #C0C0C0; }
+
+    #main-list li:nth-child(3) { border-left-color: #CD7F32; }
+    #main-list li:nth-child(3) .rank-number { color: #CD7F32; }
+
     @media (max-width: 600px) {
       body {
         padding: 16px;
@@ -157,7 +166,7 @@
 
   <h1>Top 10 Demonlist</h1>
   <h3>Ranked ONLY based on my opinion, sometimes I will consider moving things around, but I also do factor device/hz constraints if applicable. Click on the image to watch the completion video and the boxes to see additional information.</h3>
-  <ul class="top10-list">
+  <ul class="top10-list" id="main-list">
 
     <li>
       <div class="box-main">
