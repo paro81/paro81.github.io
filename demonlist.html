@@ -114,14 +114,93 @@
       border-top: 1px solid #000;
     }
 
-    #main-list li:nth-child(1) { border-left-color: #FFD700; }
-    #main-list li:nth-child(1) .rank-number { color: #FFD700; }
+    li.rank-gold { border-left-color: #FFD700; }
+    li.rank-gold .rank-number { color: #FFD700; }
 
-    #main-list li:nth-child(2) { border-left-color: #C0C0C0; }
-    #main-list li:nth-child(2) .rank-number { color: #C0C0C0; }
+    li.rank-silver { border-left-color: #C0C0C0; }
+    li.rank-silver .rank-number { color: #C0C0C0; }
 
-    #main-list li:nth-child(3) { border-left-color: #CD7F32; }
-    #main-list li:nth-child(3) .rank-number { color: #CD7F32; }
+    li.rank-bronze { border-left-color: #CD7F32; }
+    li.rank-bronze .rank-number { color: #CD7F32; }
+
+    #wayback-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    #wayback-bar label {
+      font-size: 0.95rem;
+      color: #444;
+    }
+
+    #wayback-date {
+      padding: 6px 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-family: serif;
+      font-size: 0.95rem;
+    }
+
+    #wayback-reset {
+      padding: 6px 14px;
+      background: #4f46e5;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: serif;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    #wayback-reset:hover {
+      background: #4338ca;
+    }
+
+    #wayback-banner {
+      text-align: center;
+      background: #fffbeb;
+      border: 1px solid #fbbf24;
+      color: #92400e;
+      padding: 8px 16px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    .rank-date {
+      margin-top: 4px;
+      font-size: 0.75rem;
+      color: #aaa;
+    }
+
+    li.wayback-hidden {
+      display: none;
+    }
+
+    #legacy-list .rank-number {
+      display: none;
+    }
+
+    li.wayback-promoted {
+      border-left-style: dashed;
+      opacity: 0.85;
+    }
+
+    li.wayback-promoted .rank-number {
+      display: block;
+    }
+
+    li.wayback-promoted .rank-date::after {
+      content: " · was in top 10";
+      color: #4f46e5;
+      font-style: italic;
+    }
 
     @media (max-width: 600px) {
       body {
@@ -166,9 +245,16 @@
 
   <h1>Top 10 Demonlist</h1>
   <h3>Ranked ONLY based on my opinion, sometimes I will consider moving things around, but I also do factor device/hz constraints if applicable. Click on the image to watch the completion video and the boxes to see additional information.</h3>
+  <div id="wayback-bar">
+    <label for="wayback-date">Time Machine - View list as of:</label>
+    <input type="date" id="wayback-date" />
+    <button id="wayback-reset">Show current</button>
+  </div>
+  <div id="wayback-banner"></div>
+
   <ul class="top10-list" id="main-list">
 
-    <li>
+    <li data-added="2026-05-23">
       <div class="box-main">
         <a class="thumbnail-content" href="https://www.youtube.com/watch?v=iTBVHPZ_xXs" target="_blank" onclick="event.stopPropagation()">
           <img src="https://img.youtube.com/vi/iTBVHPZ_xXs/hqdefault.jpg" alt="Video Thumbnail">
@@ -182,7 +268,7 @@
       <div class="dropdown">Additional details go here</div>
     </li>
 
-    <li>
+    <li data-added="2024-12-20">
       <div class="box-main">
         <a class="thumbnail-content" href="https://www.youtube.com/watch?v=Pr_vmvVOvmE" target="_blank" onclick="event.stopPropagation()">
           <img src="https://img.youtube.com/vi/Pr_vmvVOvmE/hqdefault.jpg" alt="Video Thumbnail">
@@ -196,7 +282,7 @@
       <div class="dropdown">Additional details go here</div>
     </li>
 
-    <li>
+    <li data-added="2026-05-14">
       <div class="box-main">
         <a class="thumbnail-content" href="https://www.youtube.com/watch?v=knyjsN2OXbE" target="_blank" onclick="event.stopPropagation()">
           <img src="https://img.youtube.com/vi/knyjsN2OXbE/hqdefault.jpg" alt="Video Thumbnail">
@@ -210,7 +296,7 @@
       <div class="dropdown">Additional details go here</div>
     </li>
 
-    <li>
+    <li data-added="2026-02-27">
       <div class="box-main">
         <a class="thumbnail-content" href="https://www.youtube.com/watch?v=d6fgoIPjbmI" target="_blank" onclick="event.stopPropagation()">
           <img src="https://img.youtube.com/vi/d6fgoIPjbmI/hqdefault.jpg" alt="Video Thumbnail">
@@ -224,7 +310,7 @@
       <div class="dropdown">Additional details go here</div>
     </li>
 
-    <li>
+    <li data-added="2026-05-02">
       <div class="box-main">
         <a class="thumbnail-content" href="https://www.youtube.com/watch?v=kdIGiRuNoZQ" target="_blank" onclick="event.stopPropagation()">
           <img src="https://img.youtube.com/vi/kdIGiRuNoZQ/hqdefault.jpg" alt="Video Thumbnail">
@@ -238,7 +324,7 @@
       <div class="dropdown">Additional details go here</div>
     </li>
 
-    <li>
+    <li data-added="2026-02-09">
       <div class="box-main">
         <a class="thumbnail-content" href="https://www.youtube.com/watch?v=9Yk5NZ1aw5g" target="_blank" onclick="event.stopPropagation()">
           <img src="https://img.youtube.com/vi/9Yk5NZ1aw5g/hqdefault.jpg" alt="Video Thumbnail">
@@ -252,7 +338,7 @@
       <div class="dropdown">Additional details go here</div>
     </li>
 
-    <li>
+    <li data-added="2025-12-03">
       <div class="box-main">
         <a class="thumbnail-content" href="https://www.youtube.com/watch?v=2HDfvTPiSkI" target="_blank" onclick="event.stopPropagation()">
           <img src="https://img.youtube.com/vi/2HDfvTPiSkI/hqdefault.jpg" alt="Video Thumbnail">
@@ -266,7 +352,7 @@
       <div class="dropdown">Additional details go here</div>
     </li>
 
-    <li>
+    <li data-added="2026-05-21">
       <div class="box-main">
         <a class="thumbnail-content" href="https://www.youtube.com/watch?v=ScA-QHgE9vw" target="_blank" onclick="event.stopPropagation()">
           <img src="https://img.youtube.com/vi/ScA-QHgE9vw/hqdefault.jpg" alt="Video Thumbnail">
@@ -280,7 +366,7 @@
       <div class="dropdown">Additional details go here</div>
     </li>
 
-    <li>
+    <li data-added="2026-03-29">
       <div class="box-main">
         <a class="thumbnail-content" href="https://www.youtube.com/watch?v=MsFSUoM5Qfc" target="_blank" onclick="event.stopPropagation()">
           <img src="https://img.youtube.com/vi/MsFSUoM5Qfc/hqdefault.jpg" alt="Video Thumbnail">
@@ -294,7 +380,7 @@
       <div class="dropdown">Additional details go here</div>
     </li>
 
-    <li>
+    <li data-added="2026-03-02">
       <div class="box-main">
         <a class="thumbnail-content" href="https://www.youtube.com/watch?v=uukx5W9UIOI" target="_blank" onclick="event.stopPropagation()">
           <img src="https://img.youtube.com/vi/uukx5W9UIOI/hqdefault.jpg" alt="Video Thumbnail">
@@ -312,13 +398,15 @@
 
   <h1>Legacy</h1>
   <h3>The placements won't be updated in this section, you can refer to <a href="https://docs.google.com/spreadsheets/d/1r2fCobUjmPva9yHVj4yEpq1GkAZfugfhrPSEBOVbt20/edit?gid=1042565648#gid=1042565648">my spreadsheet</a> for the entire (soon to be) top 100-150 demonlist as well as additional info not mentioned here.</h3>
-  <ul class="top10-list">
-    <li>
+  
+  <ul class="top10-list" id="legacy-list">
+    <li data-added="2026-02-26" data-history='[{"from":"2026-02-26","to":"2026-02-26","rank":4},{"from":"2026-02-27","to":"2026-03-01","rank":5},{"from":"2026-03-02","to":"2026-03-28","rank":6},{"from":"2026-03-29","to":"2026-05-01","rank":7},{"from":"2026-05-02","to":"2026-05-13","rank":8},{"from":"2026-05-14","to":"2026-05-20","rank":9},{"from":"2026-05-21","to":"2026-05-22","rank":10}]'>
       <div class="box-main">
         <a class="thumbnail-content" href="https://www.youtube.com/watch?v=Lo3ZlStw-MA" target="_blank" onclick="event.stopPropagation()">
           <img src="https://img.youtube.com/vi/Lo3ZlStw-MA/hqdefault.jpg" alt="Video Thumbnail">
         </a>
         <div class="text-content">
+          <div class="rank-number"></div>
           <div class="rank-title">rose</div>
           <div class="rank-description">Eggsncoffee</div>
         </div>
@@ -326,6 +414,280 @@
       <div class="dropdown">Additional details go here</div>
     </li>
 
+    <li data-added="2025-05-17" data-history='[{"from":"2025-05-17","to":"2025-08-15","rank":3},{"from":"2025-08-16","to":"2025-12-02","rank":2},{"from":"2025-12-03","to":"2026-02-08","rank":3},{"from":"2026-02-09","to":"2026-02-25","rank":4},{"from":"2026-02-26","to":"2026-02-26","rank":5},{"from":"2026-02-27","to":"2026-03-01","rank":6},{"from":"2026-03-02","to":"2026-03-28","rank":7},{"from":"2026-03-29","to":"2026-05-01","rank":8},{"from":"2026-05-02","to":"2026-05-13","rank":9},{"from":"2026-05-14","to":"2026-05-20","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/post/UgkxxzC9qRZX862EUAPaX_mz3sobR8W3IX9n" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://yt3.ggpht.com/dx7x3MBYN_Smz2UW6QNiugE1rOUwHlhl7jFW4XVGcKpzI0X-gXYj8a35yxlWLzlZR4ZJdL9qmxez-g=s616-c-fcrop64=1,38520000c7adffff-nd-v1-rwa" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">love baba</div>
+          <div class="rank-description">Zobros</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+
+    <li data-added="2025-04-21" data-history='[{"from":"2025-04-21","to":"2025-08-15","rank":2},{"from":"2025-08-16","to":"2025-12-02","rank":3},{"from":"2025-12-03","to":"2026-02-08","rank":4},{"from":"2026-02-09","to":"2026-02-25","rank":5},{"from":"2026-02-26","to":"2026-02-26","rank":6},{"from":"2026-02-27","to":"2026-03-01","rank":7},{"from":"2026-03-02","to":"2026-03-28","rank":8},{"from":"2026-03-29","to":"2026-05-01","rank":9},{"from":"2026-05-02","to":"2026-05-13","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=Tepltn18do8" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/Tepltn18do8/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">8o</div>
+          <div class="rank-description">Zobros</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+
+    <li data-added="2025-09-19" data-history='[{"from":"2025-09-19","to":"2025-12-02","rank":4},{"from":"2025-12-03","to":"2026-02-08","rank":5},{"from":"2026-02-09","to":"2026-02-25","rank":6},{"from":"2026-02-26","to":"2026-02-26","rank":7},{"from":"2026-02-27","to":"2026-03-01","rank":8},{"from":"2026-03-02","to":"2026-03-28","rank":9},{"from":"2026-03-29","to":"2026-05-01","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=LUcn4fNhQH0" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/LUcn4fNhQH0/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">theory of troll</div>
+          <div class="rank-description">Kracken</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+
+    <li data-added="2025-10-15" data-history='[{"from":"2025-10-15","to":"2025-12-02","rank":7},{"from":"2025-12-03","to":"2025-12-11","rank":8},{"from":"2025-12-12","to":"2025-12-22","rank":7},{"from":"2025-12-23","to":"2026-02-08","rank":6},{"from":"2026-02-09","to":"2026-02-25","rank":7},{"from":"2026-02-26","to":"2026-02-26","rank":8},{"from":"2026-02-27","to":"2026-03-01","rank":9},{"from":"2026-03-02","to":"2026-03-28","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=Nhf2Xsc11X8" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/Nhf2Xsc11X8/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">Twilight Step V2</div>
+          <div class="rank-description">BlackP2sFull</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+
+    <li data-added="2026-01-17" data-history='[{"from":"2026-01-17","to":"2026-02-08","rank":7},{"from":"2026-02-09","to":"2026-02-25","rank":8},{"from":"2026-02-26","to":"2026-02-26","rank":9},{"from":"2026-02-27","to":"2026-03-01","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=S2Dq4k83Pkk" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/S2Dq4k83Pkk/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">Steel Flare</div>
+          <div class="rank-description">Toxic GD</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+
+    <li data-added="2025-06-10" data-history='[{"from":"2025-06-10","to":"2025-09-18","rank":4},{"from":"2025-09-19","to":"2025-12-02","rank":5},{"from":"2025-12-03","to":"2025-12-22","rank":6},{"from":"2025-12-23","to":"2026-01-16","rank":7},{"from":"2026-01-17","to":"2026-02-08","rank":8},{"from":"2026-02-09","to":"2026-02-25","rank":9},{"from":"2026-02-26","to":"2026-02-26","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=6wA9b15np7o" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/6wA9b15np7o/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">FFFFFF</div>
+          <div class="rank-description">Vlacc</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+
+    <li data-added="2025-07-12" data-history='[{"from":"2025-07-12","to":"2025-09-18","rank":6},{"from":"2025-09-19","to":"2025-10-14","rank":7},{"from":"2025-10-15","to":"2025-12-02","rank":8},{"from":"2025-12-03","to":"2025-12-11","rank":9},{"from":"2025-12-12","to":"2026-01-16","rank":8},{"from":"2026-01-17","to":"2026-02-08","rank":9},{"from":"2026-02-09","to":"2026-02-25","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=vWSYUGWZma0" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/vWSYUGWZma0/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">drnfctn</div>
+          <div class="rank-description">jimisbad</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+
+    <li data-added="2025-05-30" data-history='[{"from":"2025-05-30","to":"2025-06-09","rank":4},{"from":"2025-06-10","to":"2025-09-18","rank":5},{"from":"2025-09-19","to":"2025-12-02","rank":6},{"from":"2025-12-03","to":"2025-12-11","rank":7},{"from":"2025-12-12","to":"2026-01-16","rank":9},{"from":"2026-01-17","to":"2026-02-08","rank":10}]'>
+      <div class="box-main">
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">ULTRA FAST COLLAB</div>
+          <div class="rank-description">nikverr</div>
+        </div>
+      </div>
+      <div class="dropdown">i have no video lol</div>
+    </li>
+
+    <li data-added="2024-08-17" data-history='[{"from":"2024-08-17","to":"2024-12-19","rank":1},{"from":"2024-12-20","to":"2025-04-20","rank":2},{"from":"2025-04-21","to":"2025-05-16","rank":3},{"from":"2025-05-17","to":"2025-05-29","rank":4},{"from":"2025-05-30","to":"2025-06-09","rank":5},{"from":"2025-06-10","to":"2025-07-11","rank":6},{"from":"2025-07-12","to":"2025-09-18","rank":7},{"from":"2025-09-19","to":"2025-10-14","rank":8},{"from":"2025-10-15","to":"2025-12-02","rank":9},{"from":"2025-12-03","to":"2026-01-16","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=AjMVm1bqE88" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/AjMVm1bqE88/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">TENDO</div>
+          <div class="rank-description">GradientXD</div>
+        </div>
+      </div>
+      <div class="dropdown">didnt record me completing it so here's the wf one</div>
+    </li>
+
+    <li data-added="2025-07-25" data-history='[{"from":"2025-07-25","to":"2025-09-18","rank":8},{"from":"2025-09-19","to":"2025-10-14","rank":9},{"from":"2025-10-15","to":"2025-12-02","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=iqqtQRz9VsA" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/iqqtQRz9VsA/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">Magma Bound</div>
+          <div class="rank-description">ScorchVx</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+
+    <li data-added="2025-07-04" data-history='[{"from":"2025-07-04","to":"2025-07-11","rank":7},{"from":"2025-07-12","to":"2025-07-24","rank":8},{"from":"2025-07-25","to":"2025-09-18","rank":9},{"from":"2025-09-19","to":"2025-10-14","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=Tfv6WhqmH1Q" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/Tfv6WhqmH1Q/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">theyaremanycolors</div>
+          <div class="rank-description">renn241</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+
+    <li data-added="2025-06-01" data-history='[{"from":"2025-06-01","to":"2025-06-09","rank":6},{"from":"2025-06-10","to":"2025-07-03","rank":7},{"from":"2025-07-04","to":"2025-07-11","rank":8},{"from":"2025-07-12","to":"2025-07-24","rank":9},{"from":"2025-07-25","to":"2025-09-18","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=jnZwstjATak" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/jnZwstjATak/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">HazardSector X</div>
+          <div class="rank-description">ZenthicAlpha</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+
+    <li data-added="2024-05-19" data-history='[{"from":"2024-05-19","to":"2024-08-16","rank":1},{"from":"2024-08-17","to":"2024-12-19","rank":2},{"from":"2024-12-20","to":"2025-04-20","rank":3},{"from":"2025-04-21","to":"2025-05-16","rank":4},{"from":"2025-05-17","to":"2025-05-29","rank":5},{"from":"2025-05-30","to":"2025-05-31","rank":6},{"from":"2025-06-01","to":"2025-06-09","rank":7},{"from":"2025-06-10","to":"2025-07-03","rank":8},{"from":"2025-07-04","to":"2025-07-11","rank":9},{"from":"2025-07-12","to":"2025-07-26","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=CVLxXNXb1Hw" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/CVLxXNXb1Hw/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">mem</div>
+          <div class="rank-description">benissad</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+
+    <li data-added="2025-04-13" data-history='[{"from":"2025-04-13","to":"2025-04-20","rank":4},{"from":"2025-04-21","to":"2025-05-16","rank":5},{"from":"2025-05-17","to":"2025-05-29","rank":6},{"from":"2025-05-30","to":"2025-05-31","rank":7},{"from":"2025-06-01","to":"2025-06-09","rank":8},{"from":"2025-06-10","to":"2025-07-03","rank":9},{"from":"2025-07-04","to":"2025-07-11","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=WAtMLKctYd4" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/WAtMLKctYd4/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">glowfishD</div>
+          <div class="rank-description">LupoDZN</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+
+    <li data-added="2024-02-22" data-history='[{"from":"2024-02-22","to":"2024-05-18","rank":1},{"from":"2024-05-19","to":"2024-08-16","rank":2},{"from":"2024-08-17","to":"2024-12-19","rank":3},{"from":"2024-12-20","to":"2025-04-12","rank":4},{"from":"2025-04-13","to":"2025-04-20","rank":5},{"from":"2025-04-21","to":"2025-05-16","rank":6},{"from":"2025-05-17","to":"2025-05-29","rank":7},{"from":"2025-05-30","to":"2025-05-31","rank":8},{"from":"2025-06-01","to":"2025-06-09","rank":9},{"from":"2025-06-10","to":"2025-07-03","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=lEqGRjqmihM" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/lEqGRjqmihM/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">ThermoDynamix</div>
+          <div class="rank-description">flash</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+
+    <li data-added="2024-07-28" data-history='[{"from":"2024-07-28","to":"2024-08-16","rank":3},{"from":"2024-08-17","to":"2024-12-19","rank":4},{"from":"2024-12-20","to":"2025-04-12","rank":5},{"from":"2025-04-13","to":"2025-04-20","rank":6},{"from":"2025-04-21","to":"2025-05-16","rank":7},{"from":"2025-05-17","to":"2025-05-29","rank":8},{"from":"2025-05-30","to":"2025-05-31","rank":9},{"from":"2025-06-01","to":"2025-06-09","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=dr89uLfkHu4" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/dr89uLfkHu4/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">Different Descent</div>
+          <div class="rank-description">danke</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+
+    <li data-added="2024-04-07" data-history='[{"from":"2024-04-07","to":"2024-05-18","rank":2},{"from":"2024-05-19","to":"2024-07-27","rank":3},{"from":"2024-07-28","to":"2024-08-16","rank":4},{"from":"2024-08-17","to":"2024-12-19","rank":5},{"from":"2024-12-20","to":"2025-04-12","rank":6},{"from":"2025-04-13","to":"2025-04-20","rank":7},{"from":"2025-04-21","to":"2025-05-16","rank":8},{"from":"2025-05-17","to":"2025-05-29","rank":9},{"from":"2025-05-30","to":"2025-05-31","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=0UE6x0d6JgM" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/0UE6x0d6JgM/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">pg clubstep</div>
+          <div class="rank-description">pg1004</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+
+    <li data-added="2024-07-30" data-history='[{"from":"2024-07-30","to":"2024-08-16","rank":5},{"from":"2024-08-17","to":"2024-12-19","rank":6},{"from":"2024-12-20","to":"2025-04-12","rank":7},{"from":"2025-04-13","to":"2025-04-20","rank":8},{"from":"2025-04-21","to":"2025-05-16","rank":9},{"from":"2025-05-17","to":"2025-05-29","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=wBGUBqNXj9s" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/wBGUBqNXj9s/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">tower descent</div>
+          <div class="rank-description">pocke</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+
+    <li data-added="2025-05-04" data-history='[{"from":"2025-05-04","to":"2025-05-17","rank":10}]'>
+      <div class="box-main">
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">death step</div>
+          <div class="rank-description">funnygame</div>
+        </div>
+      </div>
+      <div class="dropdown">i have no video lol</div>
+    </li>
+
+    <li data-added="2024-05-04" data-history='[{"from":"2024-05-04","to":"2024-05-18","rank":3},{"from":"2024-05-19","to":"2024-07-27","rank":4},{"from":"2024-07-28","to":"2024-07-29","rank":5},{"from":"2024-07-30","to":"2024-08-16","rank":6},{"from":"2024-08-17","to":"2024-12-19","rank":7},{"from":"2024-12-20","to":"2025-04-12","rank":8},{"from":"2025-04-13","to":"2025-04-20","rank":9},{"from":"2025-04-21","to":"2025-05-03","rank":10}]'>
+      <div class="box-main">
+        <a class="thumbnail-content" href="https://www.youtube.com/watch?v=eeu_wuKA2Q0" target="_blank" onclick="event.stopPropagation()">
+          <img src="https://img.youtube.com/vi/eeu_wuKA2Q0/hqdefault.jpg" alt="Video Thumbnail">
+        </a>
+        <div class="text-content">
+          <div class="rank-number"></div>
+          <div class="rank-title">SAWMERANG</div>
+          <div class="rank-description">Split72</div>
+        </div>
+      </div>
+      <div class="dropdown">Extra details here.</div>
+    </li>
+    
   </ul>
 
   <button id="scrollTopBtn" onclick="scrollToTop()" title="what do u think this means">⬆</button>
@@ -365,6 +727,93 @@
       });
     });
 
+    const waybackDate = document.getElementById('wayback-date');
+    const waybackReset = document.getElementById('wayback-reset');
+    const waybackBanner = document.getElementById('wayback-banner');
+    const mainList = document.getElementById('main-list');
+    const originalMainItems = Array.from(mainList.querySelectorAll(':scope > li'));
+
+    function updateTopColors() {
+      document.querySelectorAll('.rank-gold, .rank-silver, .rank-bronze').forEach(li => {
+        li.classList.remove('rank-gold', 'rank-silver', 'rank-bronze');
+      });
+      const visible = Array.from(mainList.querySelectorAll(':scope > li:not(.wayback-hidden)'));
+      if (visible[0]) visible[0].classList.add('rank-gold');
+      if (visible[1]) visible[1].classList.add('rank-silver');
+      if (visible[2]) visible[2].classList.add('rank-bronze');
+    }
+
+    function restoreMovedItems() {
+      document.querySelectorAll('li.wayback-promoted').forEach(li => li.remove());
+      document.querySelectorAll('li.wayback-hidden').forEach(li => li.classList.remove('wayback-hidden'));
+      originalMainItems.forEach(li => mainList.appendChild(li));
+    }
+
+    function applyWayback(dateStr) {
+      restoreMovedItems();
+
+      if (!dateStr) {
+        waybackReset.style.display = 'none';
+        waybackBanner.style.display = 'none';
+        return;
+      }
+
+      let hiddenCount = 0;
+      document.querySelectorAll('#main-list > li, #legacy-list > li').forEach(li => {
+        if (li.dataset.added > dateStr) {
+          li.classList.add('wayback-hidden');
+          hiddenCount++;
+        }
+      });
+
+      let promotedCount = 0;
+      const promotions = [];
+      document.querySelectorAll('#legacy-list li[data-history]').forEach(li => {
+        let history;
+        try { history = JSON.parse(li.dataset.history); } catch(e) { return; }
+        const entry = history.find(h => h.from <= dateStr && dateStr <= h.to);
+        if (!entry) return;
+        promotions.push({ li, entry });
+      });
+
+      promotions.sort((a, b) => a.entry.rank - b.entry.rank);
+
+      promotions.forEach(({ li, entry }) => {
+        const clone = li.cloneNode(true);
+        clone.classList.remove('wayback-hidden', 'open');
+        clone.classList.add('wayback-promoted');
+        clone.querySelector('.box-main').addEventListener('click', function() {
+          clone.classList.toggle('open');
+        });
+
+        const visibleItems = Array.from(mainList.querySelectorAll(':scope > li:not(.wayback-hidden)'));
+        const insertBefore = visibleItems[entry.rank - 1] || null;
+        mainList.insertBefore(clone, insertBefore);
+        li.classList.add('wayback-hidden');
+        promotedCount++;
+      });
+
+      waybackReset.style.display = 'inline-block';
+      waybackBanner.style.display = 'block';
+      let msg = `Viewing list as of ${dateStr}.`;
+      if (hiddenCount > 0) msg += ` ${hiddenCount} level${hiddenCount > 1 ? 's' : ''} added after this date are hidden.`;
+      if (promotedCount > 0) msg += ` ${promotedCount} legacy level${promotedCount > 1 ? 's' : ''} restored to their historical rank. Dashed lines indicate current legacy levels`;
+      waybackBanner.textContent = msg;
+      updateTopColors();
+    }
+
+    waybackDate.addEventListener('change', function() {
+      applyWayback(this.value);
+    });
+
+    waybackReset.addEventListener('click', function() {
+      waybackDate.value = '';
+      applyWayback('');
+      updateTopColors();
+    });
+
+    updateTopColors();
+
     const btn = document.getElementById('scrollTopBtn');
 
     window.addEventListener('scroll', function() {
@@ -396,10 +845,10 @@
     }
   </script>
   <!--
-  <li>
+  <li data-added="yyyy-mm-dd">
     <div class="box-main">
-      <a class="thumbnail-content" href="YOUR_LINK" target="_blank" onclick="event.stopPropagation()">
-        <img src="YOUR_THUMBNAIL_URL" alt="Video Thumbnail">
+      <a class="thumbnail-content" href="LINK" target="_blank" onclick="event.stopPropagation()">
+        <img src="THUMBNAIL_URL" alt="Video Thumbnail">
       </a>
       <div class="text-content">
         <div class="rank-number"></div>
