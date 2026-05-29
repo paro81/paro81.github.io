@@ -20,10 +20,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 "to cook or not to cook, there is no question. melt the frying pan",
                 "bigger than the instagram, bigger than the twitch",
                 "fake it till you make it",
-                "rip good ol' laptop june2017-july2025",
+                "rip good unc laptop june2017-july2025",
                 "why use linktree",
                 "thats enough mr west please no more today",
-                "i've completely lost all meaning"
+                "i've completely lost all meaning",
+                "its like whatre you gonna do and then you just do it, you know",
+                "nothing ever happens anyway"
             ];
         
             var randomIndex = Math.floor(Math.random() * messages.length);
