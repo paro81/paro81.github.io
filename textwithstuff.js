@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 "thats enough mr west please no more today",
                 "i've completely lost all meaning",
                 "its like whatre you gonna do and then you just do it, you know",
-                "nothing ever happens anyway"
+                "nothing ever happens anyway",
                 "where did we leave off? i'm not so sure..."
             ];
         
