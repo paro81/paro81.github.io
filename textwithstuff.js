@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 "i've completely lost all meaning",
                 "its like whatre you gonna do and then you just do it, you know",
                 "nothing ever happens anyway"
+                "where did we leave off? i'm not so sure..."
             ];
         
             var randomIndex = Math.floor(Math.random() * messages.length);
