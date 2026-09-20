@@ -32,15 +32,15 @@
 
             // valid or no
             if (isNaN(guessNumber) || guessNumber < 1 || guessNumber > 100) {
-                document.getElementById("message").innerText = "Please enter a valid number between 1 and 100.";
+                document.getElementById("message").innerText = "really";
             } else {
                 // comparing
                 if (guessNumber === secretNumber) {
-                    document.getElementById("message").innerText = "Congratulations! You guessed the correct number!";
+                    document.getElementById("message").innerText = "CONGREGATIONS! YOU guessed the correct NUMBER!";
                 } else if (guessNumber > secretNumber) {
-                    document.getElementById("message").innerText = "Too high! Try again.";
+                    document.getElementById("message").innerText = "shot for the stars with this one, calm down";
                 } else {
-                    document.getElementById("message").innerText = "Too low! Try again.";
+                    document.getElementById("message").innerText = "think you need a few more";
                 }
             }
         }
